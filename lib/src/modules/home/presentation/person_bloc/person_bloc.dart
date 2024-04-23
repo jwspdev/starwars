@@ -26,6 +26,7 @@ class PersonBloc extends Bloc<PersonEvent, PersonState> {
   _onPeoplePageChanged(
       OnPeoplePageChanged event, Emitter<PersonState> emit) async {
     emit(PersonLoading());
+    debugPrint('usecase: $_getCurrentPersonUseCase');
     debugPrint('potek 1');
     final result = await _listPeopleUseCase.call(params: event.pageNumber);
     debugPrint('POTEK 2');
