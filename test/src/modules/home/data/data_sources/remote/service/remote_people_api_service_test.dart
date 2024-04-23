@@ -31,7 +31,7 @@ void main() {
     debugPrint('NEXT: ${result.data.next}');
     debugPrint('PREVIOUS: ${result.data.previous}');
     for (var person in result.data.results) {
-      debugPrint('${person}');
+      debugPrint('$person');
     }
     //assert
     expect(result, isA<HttpResponse<ListPeopleResponse>>());

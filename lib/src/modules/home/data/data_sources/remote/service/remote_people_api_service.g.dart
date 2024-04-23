@@ -9,10 +9,7 @@ part of 'remote_people_api_service.dart';
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
 class _RemotePeopleApiService implements RemotePeopleApiService {
-  _RemotePeopleApiService(
-    this._dio, {
-    this.baseUrl,
-  }) {
+  _RemotePeopleApiService(this._dio) {
     baseUrl ??= 'https://swapi.py4e.com/api/';
   }
 
