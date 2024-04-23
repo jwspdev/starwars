@@ -3,11 +3,10 @@ import 'package:star_wars_app/src/modules/home/domain/entities/responses/list_pe
 
 class ListPeopleResponse extends ListPeopleResponseEntity {
   const ListPeopleResponse(
-      {required int count,
-      String? next,
-      String? previous,
-      required List<Person> results})
-      : super(count: count, results: results, next: next, previous: previous);
+      {required super.count,
+      super.next,
+      super.previous,
+      required List<Person> super.results});
   factory ListPeopleResponse.fromJson(Map<String, dynamic> json) {
     List<Person> results = [];
     for (var person in json['results']) {

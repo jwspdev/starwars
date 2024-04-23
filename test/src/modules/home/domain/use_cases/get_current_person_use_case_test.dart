@@ -53,7 +53,7 @@ void main() {
       final jsonResult = ListPeopleResponse.fromJson(jsonMap).toEntity();
 
       final result = await listPeopleUseCase.call(params: page);
-      debugPrint('${jsonResult}');
+      debugPrint('$jsonResult');
       //assert
       expect(result.data, equals(jsonResult));
     });

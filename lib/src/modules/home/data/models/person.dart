@@ -2,31 +2,18 @@ import 'package:star_wars_app/src/modules/home/domain/entities/person_entity.dar
 
 class Person extends PersonEntity {
   const Person(
-      {required String name,
-      required double height,
-      required double mass,
-      required String hairColor,
-      required String skinColor,
-      required String eyeColor,
-      required String birthYear,
-      required String gender,
-      List<String>? films,
-      List<String>? vehicles,
-      List<String>? starships,
-      required String url})
-      : super(
-            name: name,
-            height: height,
-            mass: mass,
-            hairColor: hairColor,
-            skinColor: skinColor,
-            eyeColor: eyeColor,
-            birthYear: birthYear,
-            gender: gender,
-            films: films,
-            vehicles: vehicles,
-            starships: starships,
-            url: url);
+      {required super.name,
+      required super.height,
+      required super.mass,
+      required super.hairColor,
+      required super.skinColor,
+      required super.eyeColor,
+      required super.birthYear,
+      required super.gender,
+      super.films,
+      super.vehicles,
+      super.starships,
+      required super.url});
   factory Person.fromJson(Map<String, dynamic> json) => Person(
       name: json['name'],
       height: double.parse(json['height']),

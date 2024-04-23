@@ -11,7 +11,7 @@ abstract class RemotePeopleApiService {
   factory RemotePeopleApiService(Dio dio) = _RemotePeopleApiService;
 
   //list people
-  @GET('$PEOPLE_PATH')
+  @GET(PEOPLE_PATH)
   Future<HttpResponse<ListPeopleResponse>> listPeople(
     @Query('page') int pageNumber,
   );

@@ -38,6 +38,6 @@ class PersonBloc extends Bloc<PersonEvent, PersonState> {
     }
   }
 
-  _onCurrentPersonIdChanged(
-      OnCurrentPersonIdChanged event, Emitter<PersonState> emit) async {}
+  // _onCurrentPersonIdChanged(
+  //     OnCurrentPersonIdChanged event, Emitter<PersonState> emit) async {}
 }
