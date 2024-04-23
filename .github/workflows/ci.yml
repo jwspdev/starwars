@@ -16,7 +16,7 @@ jobs:
                 java-version: "12.x"
             # allows to use flutter commands in this workflow
             - name: Setup Flutter Commands
-              uses: subosito/flutter_action@v1
+              uses: subosito/flutter-action@v1
               with:
                 channel: "stable"
             - run: flutter pub get
