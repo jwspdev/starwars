@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:star_wars_app/src/core/resources/data_state.dart';
-import 'package:star_wars_app/src/modules/home/data/data_sources/remote/source/remote_people_data_source.dart';
+import 'package:star_wars_app/src/modules/home/data/data_sources/remote/people/source/remote_people_data_source.dart';
 import 'package:star_wars_app/src/modules/home/data/models/person.dart';
 import 'package:star_wars_app/src/modules/home/data/models/responses/list_people_response.dart';
 import 'package:star_wars_app/src/modules/home/domain/entities/person_entity.dart';
