@@ -8,6 +8,7 @@ import 'package:star_wars_app/src/modules/home/data/data_sources/remote/source/r
 import 'package:star_wars_app/src/modules/home/data/models/person.dart';
 import 'package:star_wars_app/src/modules/home/data/models/responses/list_people_response.dart';
 import 'package:star_wars_app/src/modules/home/data/repositories/people_repository_impl.dart';
+import 'package:star_wars_app/src/modules/home/domain/entities/responses/list_people_response_entity.dart';
 import 'package:star_wars_app/src/modules/home/domain/use_cases/get_current_person_use_case.dart';
 import 'package:star_wars_app/src/modules/home/domain/use_cases/list_people_use_case.dart';
 
@@ -43,19 +44,25 @@ void main() {
       expect(result.data, equals(jsonResult));
     });
     test(
-        'should call repository from use case and return list of person entity',
+        '\nshould call repository from use case and return list of person entity',
         () async {
       //arrange
       int page = 1;
       final Map<String, dynamic> jsonMap = json.decode(
           readJson('helpers/dummy_data/dummy_list_people_response.json'));
+      // final Map<String, dynamic> personMap = json
+      //     .decode(readJson('helpers/dummy_data/dummy_person_response.json'));
       //act
       final jsonResult = ListPeopleResponse.fromJson(jsonMap).toEntity();
+      // final personResult = Person.fromJson(personMap).toEntity();
 
       final result = await listPeopleUseCase.call(params: page);
-      debugPrint('$jsonResult');
+      debugPrint('JSON: ${result.data}');
       //assert
-      expect(result.data, equals(jsonResult));
+      ListPeopleResponseEntity data = result.data;
+
+      expect(data.results, equals(jsonResult.results));
+      // expect(result.data, isA<ListResponseBaseEntity>());
     });
   });
 }

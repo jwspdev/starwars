@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class PersonEntity extends Equatable {
+  final String? uniqueId;
   final String name;
   final double height;
   final double mass;
@@ -13,22 +14,27 @@ class PersonEntity extends Equatable {
   final List<String>? vehicles;
   final List<String>? starships;
   final String url;
+  final String? imageUrl;
 
-  const PersonEntity(
-      {required this.name,
-      required this.height,
-      required this.mass,
-      required this.hairColor,
-      required this.skinColor,
-      required this.eyeColor,
-      required this.birthYear,
-      required this.gender,
-      this.films,
-      this.vehicles,
-      this.starships,
-      required this.url});
+  const PersonEntity({
+    this.uniqueId,
+    required this.name,
+    required this.height,
+    required this.mass,
+    required this.hairColor,
+    required this.skinColor,
+    required this.eyeColor,
+    required this.birthYear,
+    required this.gender,
+    this.films,
+    this.vehicles,
+    this.starships,
+    required this.url,
+    this.imageUrl,
+  });
   @override
   List<Object?> get props => [
+        uniqueId,
         name,
         height,
         mass,
@@ -39,6 +45,7 @@ class PersonEntity extends Equatable {
         films,
         vehicles,
         starships,
-        url
+        url,
+        imageUrl,
       ];
 }

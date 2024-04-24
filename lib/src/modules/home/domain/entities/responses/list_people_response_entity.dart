@@ -1,15 +1,15 @@
-import 'package:equatable/equatable.dart';
+import 'package:star_wars_app/src/modules/home/domain/entities/base_entities/list_response_base_entity.dart';
 import 'package:star_wars_app/src/modules/home/domain/entities/person_entity.dart';
 
-class ListPeopleResponseEntity extends Equatable {
-  final int count;
-  final String? next;
-  final String? previous;
+class ListPeopleResponseEntity extends ListResponseBaseEntity {
   final List<PersonEntity> results;
 
   const ListPeopleResponseEntity(
-      {required this.count, this.next, this.previous, required this.results});
+      {required super.count,
+      super.next,
+      super.previous,
+      required this.results});
 
   @override
-  List<Object?> get props => [count, next, previous, results];
+  List<Object?> get props => super.props..add([results]);
 }

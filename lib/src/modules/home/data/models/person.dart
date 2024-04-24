@@ -2,7 +2,8 @@ import 'package:star_wars_app/src/modules/home/domain/entities/person_entity.dar
 
 class Person extends PersonEntity {
   const Person(
-      {required super.name,
+      {super.uniqueId,
+      required super.name,
       required super.height,
       required super.mass,
       required super.hairColor,
@@ -13,7 +14,8 @@ class Person extends PersonEntity {
       super.films,
       super.vehicles,
       super.starships,
-      required super.url});
+      required super.url,
+      super.imageUrl});
   factory Person.fromJson(Map<String, dynamic> json) => Person(
       name: json['name'],
       height: double.parse(json['height']),
@@ -34,6 +36,7 @@ class Person extends PersonEntity {
       url: json['url']);
 
   PersonEntity toEntity() => PersonEntity(
+      uniqueId: uniqueId,
       name: name,
       height: height,
       mass: mass,
@@ -45,5 +48,6 @@ class Person extends PersonEntity {
       films: films,
       vehicles: vehicles,
       starships: starships,
-      url: url);
+      url: url,
+      imageUrl: imageUrl);
 }
