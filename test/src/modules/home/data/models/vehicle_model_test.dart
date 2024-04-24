@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:star_wars_app/src/modules/home/data/models/responses/list_vehicle_response.dart';
 import 'package:star_wars_app/src/modules/home/data/models/vehicle.dart';
 import 'package:star_wars_app/src/modules/home/domain/entities/base_entities/transpo_base_entity.dart';
 import 'package:star_wars_app/src/modules/home/domain/entities/responses/list_vehicle_response_entity.dart';
@@ -76,7 +77,7 @@ void main() {
   group('list vehicle models test group', () {
     final Map<String, dynamic> jsonMap = json.decode(readJson(
         'helpers/dummy_data/vehicle/dummy_list_vehicle_response.json'));
-    final jsonResult = Vehicle.fromJson(jsonMap);
+    final jsonResult = ListVehicleResponse.fromJson(jsonMap);
     test('should be inherited by list vehicle response entity', () {
       expect(jsonResult, isA<ListVehicleResponseEntity>());
     });
