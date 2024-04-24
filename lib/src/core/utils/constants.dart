@@ -5,3 +5,5 @@ const String STAR_WARS_ENDPOINT = 'https://swapi.py4e.com/api/';
 
 //paths
 const String PEOPLE_PATH = 'people/';
+const String STARSHIP_PATH = 'starships/';
+const String VEHICLE_PATH = 'vehicles/';

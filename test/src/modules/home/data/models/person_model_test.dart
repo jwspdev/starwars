@@ -2,8 +2,11 @@
 
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:star_wars_app/src/modules/home/data/models/person.dart';
+import 'package:star_wars_app/src/modules/home/data/models/responses/list_people_response.dart';
+import 'package:star_wars_app/src/modules/home/domain/entities/base_entities/list_response_base_entity.dart';
 import 'package:star_wars_app/src/modules/home/domain/entities/person_entity.dart';
 
 import '../../../../../helpers/json_reader.dart';
@@ -51,5 +54,20 @@ void main() {
     final result = Person.fromJson(jsonMap);
     //assert
     expect(result, equals(testPersonModel));
+  });
+
+  group('inheritance list response group', () {
+    test('\nshould be subclass of list', () async {
+      //arrange
+      final Map<String, dynamic> jsonMap = json.decode(
+          readJson('helpers/dummy_data/dummy_list_people_response.json'));
+
+      //act
+      final jsonResult = ListPeopleResponse.fromJson(jsonMap);
+
+      //assert
+      debugPrint('${jsonResult.runtimeType}');
+      expect(jsonResult, isA<ListResponseBaseEntity>());
+    });
   });
 }

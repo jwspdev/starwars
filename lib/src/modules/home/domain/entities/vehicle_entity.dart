@@ -1,15 +1,16 @@
-import 'package:star_wars_app/src/modules/home/domain/entities/transpo_base_entity.dart';
+import 'package:star_wars_app/src/modules/home/domain/entities/base_entities/transpo_base_entity.dart';
 
 class VehicleEntity extends TranspoBaseEntity {
-  final String vehicleClass;
+  final String? vehicleClass;
   const VehicleEntity(
-      {required this.vehicleClass,
+      {super.uniqueId,
+      required this.vehicleClass,
       required super.name,
       required super.model,
       required super.manufacturer,
       required super.costInCredits,
       required super.length,
-      required super.maxAtmosphericSpeed,
+      required super.maxAtmospheringSpeed,
       required super.crew,
       required super.passengers,
       required super.cargoCapacity,
