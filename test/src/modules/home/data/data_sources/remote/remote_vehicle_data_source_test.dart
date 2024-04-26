@@ -7,7 +7,7 @@ import 'package:star_wars_app/src/modules/home/data/models/responses/list_vehicl
 import 'package:star_wars_app/src/modules/home/data/models/vehicle.dart';
 import 'package:star_wars_app/src/modules/home/domain/entities/vehicle_entity.dart';
 
-import '../../../../../../../helpers/json_reader.dart';
+import '../../../../../../helpers/json_reader.dart';
 
 void main() {
   late RemoteVehicleDataSourceImpl dataSource;
