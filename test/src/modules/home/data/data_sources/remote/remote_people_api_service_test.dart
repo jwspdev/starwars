@@ -9,7 +9,7 @@ import 'package:star_wars_app/src/modules/home/data/data_sources/remote/people/s
 import 'package:star_wars_app/src/modules/home/data/models/person.dart';
 import 'package:star_wars_app/src/modules/home/data/models/responses/list_people_response.dart';
 
-import '../../../../../../../helpers/json_reader.dart';
+import '../../../../../../helpers/json_reader.dart';
 
 void main() {
   late Dio dio;
