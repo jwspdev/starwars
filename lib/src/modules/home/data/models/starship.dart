@@ -1,3 +1,5 @@
+import 'package:star_wars_app/src/core/utils/constants.dart';
+import 'package:star_wars_app/src/core/utils/extensions/string_extensions.dart';
 import 'package:star_wars_app/src/modules/home/domain/entities/starship_entity.dart';
 
 class Starship extends StarshipEntity {
@@ -18,28 +20,36 @@ class Starship extends StarshipEntity {
       required super.consumables,
       required super.pilots,
       required super.films,
-      required super.url});
+      required super.url,
+      super.imageUrl});
 
   //from json mapper
-  factory Starship.fromJson(Map<String, dynamic> json) => Starship(
-      hyperdriveRating: double.parse(json['hyperdrive_rating']),
-      mglt: double.parse(json['MGLT']),
-      starshipClass: json['starship_class'],
-      name: json['name'],
-      model: json['model'],
-      manufacturer: json['manufacturer'],
-      costInCredits: json['cost_in_credits'],
-      length: json['length'],
-      maxAtmospheringSpeed: json['max_atmosphering_speed'],
-      crew: json['crew'],
-      passengers: json['passengers'],
-      cargoCapacity: json['cargo_capacity'],
-      consumables: json['consumables'],
-      pilots:
-          (json['pilots'] as List<dynamic>?)?.map((e) => e.toString()).toList(),
-      films:
-          (json['films'] as List<dynamic>?)?.map((e) => e.toString()).toList(),
-      url: json['url']);
+  factory Starship.fromJson(Map<String, dynamic> json) {
+    String id = json['url'].toString().getIdFromUrl();
+    String uniqueId = "$STARSHIP_PATH$id";
+    return Starship(
+        uniqueId: uniqueId,
+        hyperdriveRating: double.parse(json['hyperdrive_rating']),
+        mglt: double.parse(json['MGLT']),
+        starshipClass: json['starship_class'],
+        name: json['name'],
+        model: json['model'],
+        manufacturer: json['manufacturer'],
+        costInCredits: json['cost_in_credits'],
+        length: json['length'],
+        maxAtmospheringSpeed: json['max_atmosphering_speed'],
+        crew: json['crew'],
+        passengers: json['passengers'],
+        cargoCapacity: json['cargo_capacity'],
+        consumables: json['consumables'],
+        pilots: (json['pilots'] as List<dynamic>?)
+            ?.map((e) => e.toString())
+            .toList(),
+        films: (json['films'] as List<dynamic>?)
+            ?.map((e) => e.toString())
+            .toList(),
+        url: json['url']);
+  }
 
   //to entity converter
   StarshipEntity toEntity() => StarshipEntity(
