@@ -14,7 +14,7 @@ import 'package:star_wars_app/src/modules/home/data/repositories/people_reposito
 import 'package:star_wars_app/src/modules/home/domain/entities/responses/list_people_response_entity.dart';
 import 'package:star_wars_app/src/modules/home/domain/use_cases/person/get_current_person_use_case.dart';
 import 'package:star_wars_app/src/modules/home/domain/use_cases/person/list_people_use_case.dart';
-import 'package:star_wars_app/src/modules/home/presentation/person_bloc/person_bloc.dart';
+import 'package:star_wars_app/src/modules/home/presentation/blocs/person_bloc/person_bloc.dart';
 
 import '../../../../../helpers/json_reader.dart';
 
