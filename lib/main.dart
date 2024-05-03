@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:star_wars_app/src/config/routes.dart';
 import 'package:star_wars_app/src/dependency_injection/injection_container.dart';
-import 'package:star_wars_app/src/modules/home/presentation/pages/home_page.dart';
 
 void main() {
   initializeDependencies();
@@ -12,6 +12,8 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: HomePage());
+    return MaterialApp.router(
+      routerConfig: router,
+    );
   }
 }
