@@ -1,3 +1,5 @@
+import 'package:star_wars_app/src/core/utils/constants.dart';
+import 'package:star_wars_app/src/core/utils/extensions/string_extensions.dart';
 import 'package:star_wars_app/src/modules/home/domain/entities/vehicle_entity.dart';
 
 class Vehicle extends VehicleEntity {
@@ -16,10 +18,14 @@ class Vehicle extends VehicleEntity {
       required super.consumables,
       required super.pilots,
       required super.films,
-      required super.url});
+      required super.url,
+      super.imageUrl});
   //from Json Mapper
   factory Vehicle.fromJson(Map<String, dynamic> json) {
+    String id = json['url'].toString().getIdFromUrl();
+    String uniqueId = "$VEHICLE_PATH$id";
     return Vehicle(
+        uniqueId: uniqueId,
         vehicleClass: json['vehicle_class'] ?? '',
         name: json['name'] ?? '',
         model: json['model'] ?? '',

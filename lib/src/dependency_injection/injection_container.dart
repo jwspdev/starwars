@@ -24,7 +24,10 @@ import 'package:star_wars_app/src/modules/home/domain/use_cases/starship/get_cur
 import 'package:star_wars_app/src/modules/home/domain/use_cases/starship/list_starship_use_case.dart';
 import 'package:star_wars_app/src/modules/home/domain/use_cases/vehicle/get_current_vehicle_use_case.dart';
 import 'package:star_wars_app/src/modules/home/domain/use_cases/vehicle/list_vehicles_use_case.dart';
-import 'package:star_wars_app/src/modules/home/presentation/person_bloc/person_bloc.dart';
+import 'package:star_wars_app/src/modules/home/presentation/blocs/film_bloc/film_bloc.dart';
+import 'package:star_wars_app/src/modules/home/presentation/blocs/person_bloc/person_bloc.dart';
+import 'package:star_wars_app/src/modules/home/presentation/blocs/starship_bloc/starship_bloc.dart';
+import 'package:star_wars_app/src/modules/home/presentation/blocs/vehicle_bloc/vehicle_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -65,6 +68,10 @@ Future<void> initializeDependencies() async {
   //films
   sl.registerSingleton<GetCurrentFilmUseCase>(GetCurrentFilmUseCase(sl()));
   sl.registerSingleton<ListFilmUseCase>(ListFilmUseCase(sl()));
+
   //blocs
   sl.registerFactory(() => PersonBloc(sl(), sl()));
+  sl.registerFactory(() => FilmBloc(sl(), sl()));
+  sl.registerFactory(() => VehicleBloc(sl(), sl()));
+  sl.registerFactory(() => StarshipBloc(sl(), sl()));
 }

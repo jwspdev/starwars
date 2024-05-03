@@ -16,22 +16,23 @@ abstract class TranspoBaseEntity extends Equatable {
   final List<String>? pilots;
   final List<String>? films;
   final String url;
-  const TranspoBaseEntity({
-    this.uniqueId,
-    required this.name,
-    required this.model,
-    required this.manufacturer,
-    required this.costInCredits,
-    required this.length,
-    required this.maxAtmospheringSpeed,
-    required this.crew,
-    required this.passengers,
-    required this.cargoCapacity,
-    required this.consumables,
-    required this.pilots,
-    required this.films,
-    required this.url,
-  });
+  final String? imageUrl;
+  const TranspoBaseEntity(
+      {this.uniqueId,
+      required this.name,
+      required this.model,
+      required this.manufacturer,
+      required this.costInCredits,
+      required this.length,
+      required this.maxAtmospheringSpeed,
+      required this.crew,
+      required this.passengers,
+      required this.cargoCapacity,
+      required this.consumables,
+      required this.pilots,
+      required this.films,
+      required this.url,
+      this.imageUrl});
 
   @override
   List<Object?> get props => [
@@ -48,6 +49,7 @@ abstract class TranspoBaseEntity extends Equatable {
         consumables,
         pilots,
         films,
-        url
+        url,
+        imageUrl
       ];
 }

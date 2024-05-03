@@ -23,3 +23,11 @@ class OnCurrentPersonIdChanged extends PersonEvent {
   @override
   List<Object> get props => [id];
 }
+
+class OnGetMultiplePeople extends PersonEvent {
+  final List<int>? ids;
+
+  const OnGetMultiplePeople({this.ids});
+  @override
+  List<Object> get props => [ids ?? []];
+}

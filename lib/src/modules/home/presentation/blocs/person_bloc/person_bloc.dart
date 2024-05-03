@@ -13,6 +13,7 @@ part 'person_event.dart';
 part 'person_state.dart';
 
 class PersonBloc extends Bloc<PersonEvent, PersonState> {
+  // ignore: unused_field
   final GetCurrentPersonUseCase _getCurrentPersonUseCase;
   final ListPeopleUseCase _listPeopleUseCase;
   PersonBloc(
@@ -26,14 +27,14 @@ class PersonBloc extends Bloc<PersonEvent, PersonState> {
   _onPeoplePageChanged(
       OnPeoplePageChanged event, Emitter<PersonState> emit) async {
     emit(PersonLoading());
-    debugPrint('usecase: $_getCurrentPersonUseCase');
-    debugPrint('potek 1');
+    await Future.delayed(const Duration(seconds: 1));
     final result = await _listPeopleUseCase.call(params: event.pageNumber);
-    debugPrint('POTEK 2');
+    debugPrint('${result.data}');
+
     if (result is DataSuccess) {
-      debugPrint('${result.data}');
       emit(ListOfPeopleLoaded(result: result.data!));
-    } else if (result is DataFailure) {
+    }
+    if (result is DataFailure) {
       emit(PersonError(exception: result.exception!));
     }
   }
