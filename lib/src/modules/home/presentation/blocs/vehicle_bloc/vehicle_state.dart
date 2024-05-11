@@ -26,3 +26,11 @@ final class VehicleError extends VehicleState {
   @override
   List<Object> get props => [exception];
 }
+
+final class VehiclesLoaded extends VehicleState {
+  final ListVehicleResponseEntity result;
+
+  const VehiclesLoaded({required this.result});
+  @override
+  List<Object> get props => [result];
+}
