@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   bloc: ^8.1.4
+  countup: ^0.1.4
   cupertino_icons: ^1.0.8
   dartz: ^0.10.1
   dio: ^5.4.3+1
@@ -21,6 +22,7 @@ dependencies:
   go_router: ^13.2.4
   http: ^1.2.0
   intl: ^0.19.0
+  mime: ^1.0.5
   mockito: ^5.4.4
   mocktail: ^1.0.3
   retrofit: ^4.1.0
@@ -36,6 +38,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/no_image.jpg
+    - assets/images/default_vehicle_image.png
   fonts:
   - family: OpenSans
     fonts:

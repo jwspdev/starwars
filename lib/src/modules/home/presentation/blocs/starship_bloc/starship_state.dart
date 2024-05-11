@@ -25,3 +25,11 @@ final class StarshipsByIdsLoaded extends StarshipState {
   @override
   List<Object> get props => [starships];
 }
+
+final class ListOfStarshipsLoaded extends StarshipState {
+  final ListStarshipsResponseEntity result;
+
+  const ListOfStarshipsLoaded({required this.result});
+  @override
+  List<Object> get props => [result];
+}

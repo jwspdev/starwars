@@ -27,6 +27,14 @@ final class CurrentPersonLoaded extends PersonState {
   List<Object> get props => [result];
 }
 
+final class PeopleByIdsLoaded extends PersonState {
+  final List<PersonEntity> peopleList;
+
+  const PeopleByIdsLoaded({required this.peopleList});
+  @override
+  List<Object> get props => [peopleList];
+}
+
 final class PersonError extends PersonState {
   final Exception exception;
 

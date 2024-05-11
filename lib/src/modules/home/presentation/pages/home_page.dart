@@ -6,6 +6,8 @@ import 'package:star_wars_app/src/core/widgets/custom_top_nav/horizontal_contain
 import 'package:star_wars_app/src/dependency_injection/injection_container.dart';
 import 'package:star_wars_app/src/modules/home/presentation/blocs/film_bloc/film_bloc.dart';
 import 'package:star_wars_app/src/modules/home/presentation/blocs/person_bloc/person_bloc.dart';
+import 'package:star_wars_app/src/modules/home/presentation/blocs/starship_bloc/starship_bloc.dart';
+import 'package:star_wars_app/src/modules/home/presentation/blocs/vehicle_bloc/vehicle_bloc.dart';
 import 'package:star_wars_app/src/modules/home/presentation/pages/people_page.dart';
 import 'package:star_wars_app/src/modules/home/presentation/pages/starship_page.dart';
 import 'package:star_wars_app/src/modules/home/presentation/pages/under_construction_page.dart';
@@ -30,6 +32,12 @@ class _HomePageState extends State<HomePage> {
         BlocProvider<PersonBloc>(
             create: (context) =>
                 sl()..add(const OnPeoplePageChanged(pageNumber: 1))),
+        BlocProvider<VehicleBloc>(
+            create: (context) =>
+                sl()..add(const OnVehiclePageChanged(pageNumber: 1))),
+        BlocProvider<StarshipBloc>(
+            create: (context) =>
+                sl()..add(const OnStarshipPageChanged(pageNumber: 1)))
       ],
       child: Column(
         children: [

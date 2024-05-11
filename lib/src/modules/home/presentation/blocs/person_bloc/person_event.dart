@@ -25,9 +25,9 @@ class OnCurrentPersonIdChanged extends PersonEvent {
 }
 
 class OnGetMultiplePeople extends PersonEvent {
-  final List<int>? ids;
+  final List<String> urls;
 
-  const OnGetMultiplePeople({this.ids});
+  const OnGetMultiplePeople({required this.urls});
   @override
-  List<Object> get props => [ids ?? []];
+  List<Object> get props => [urls];
 }
