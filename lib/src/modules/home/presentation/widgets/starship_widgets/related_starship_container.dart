@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:star_wars_app/src/core/widgets/styles/custom_text_styles.dart';
 import 'package:star_wars_app/src/modules/home/domain/entities/starship_entity.dart';
 import 'package:star_wars_app/src/modules/home/presentation/blocs/starship_bloc/starship_bloc.dart';
+import 'package:star_wars_app/src/modules/home/presentation/widgets/starship_widgets/starship_card.dart';
 
 class RelatedStarshipContainer extends StatelessWidget {
   const RelatedStarshipContainer({super.key});
@@ -36,53 +37,7 @@ class RelatedStarshipContainer extends StatelessWidget {
                 itemCount: starships.length,
                 itemBuilder: (context, index) {
                   var currentStarship = starships[index];
-                  return Card(
-                    color: Colors.white,
-                    elevation: 4,
-                    child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            SizedBox(
-                              width: 88,
-                              height: 88,
-                              child: currentStarship.imageUrl == null
-                                  ? Image.asset('assets/images/no_image.jpg')
-                                  : Image.network(currentStarship.imageUrl!),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      width: 180,
-                                      child: Text(
-                                        currentStarship.starshipClass,
-                                        style: openSansMedium(fontSize: 14),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 180,
-                                      child: Text(
-                                        currentStarship.model,
-                                        style: openSansRegular(
-                                            fontSize: 12, color: Colors.grey),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 180,
-                                      child: Text(
-                                        currentStarship.name,
-                                        style: openSansBoldText(fontSize: 20),
-                                      ),
-                                    ),
-                                  ]),
-                            ),
-                          ],
-                        )),
-                  );
+                  return StarshipCard(starship: currentStarship);
                 });
           }
           return Container();
