@@ -14,7 +14,7 @@ class VehiclePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<VehicleBloc, VehicleState>(builder: (context, state) {
       if (state is VehicleLoading) {
-        return Center(
+        return const Center(
           child: CupertinoActivityIndicator(),
         );
       }
