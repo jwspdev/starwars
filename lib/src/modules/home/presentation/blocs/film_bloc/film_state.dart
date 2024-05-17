@@ -12,7 +12,7 @@ final class FilmInitial extends FilmState {}
 final class FilmLoading extends FilmState {}
 
 final class ListOfFilmsLoaded extends FilmState {
-  final ListFilmsResponseEntity films;
+  final List<FilmEntity> films;
 
   const ListOfFilmsLoaded({required this.films});
   @override
