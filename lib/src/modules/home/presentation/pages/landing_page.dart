@@ -1,11 +1,18 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:star_wars_app/src/core/utils/custom_colors.dart';
 import 'package:star_wars_app/src/core/widgets/styles/custom_text_styles.dart';
 import 'package:star_wars_app/src/modules/home/presentation/pages/home_page.dart';
+import 'package:star_wars_app/src/modules/liked/presentation/films/pages/rate_films_page.dart';
+import 'package:star_wars_app/src/modules/liked/presentation/liked_page.dart';
 
 class LandingPage extends StatefulWidget {
-  const LandingPage({super.key});
+  const LandingPage({
+    super.key,
+  });
   static const String routePath = "/";
   @override
   State<LandingPage> createState() => _LandingPageState();
@@ -36,8 +43,26 @@ class _LandingPageState extends State<LandingPage> {
             _selectedIndex = index;
           });
         },
-        children: const [HomePage(), Text('test liked')],
+        children: const [HomePage(), LikedPage()],
       ),
+      floatingActionButton: Visibility(
+          visible: _selectedIndex == 1,
+          child: FloatingActionButton.extended(
+              label: Row(
+                children: [
+                  const Icon(
+                    CupertinoIcons.film,
+                    color: Colors.black,
+                  ),
+                  Text(
+                    '  Rank Films',
+                    style: openSansMedium(),
+                  )
+                ],
+              ),
+              onPressed: () {
+                context.push(RateFilmsPage.routePath);
+              })),
       bottomNavigationBar: BottomAppBar(
         padding: const EdgeInsets.symmetric(horizontal: 32),
         height: kBottomNavigationBarHeight,

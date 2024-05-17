@@ -10,8 +10,8 @@ import '../../../../../helpers/json_reader.dart';
 
 void main() {
   const testStarshipModel = StarshipEntity(
-      hyperdriveRating: 2.0,
-      mglt: 60,
+      hyperdriveRating: '2.0',
+      mglt: '60',
       starshipClass: "corvette",
       name: "CR90 corvette",
       model: "CR90 corvette",

@@ -37,7 +37,7 @@ class _CurrentStarshipPageState extends State<CurrentStarshipPage> {
                 ..add(OnGetMultiplePeople(urls: currentStarship.pilots ?? []))),
         ],
         child: Scaffold(
-            body: Container(
+            body: SizedBox(
           width: double.maxFinite,
           height: double.maxFinite,
           child: Stack(children: [
@@ -55,7 +55,7 @@ class _CurrentStarshipPageState extends State<CurrentStarshipPage> {
             Positioned(
               top: MediaQuery.of(context).size.height / 2.5,
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
                   color: Colors.white,
                 ),
@@ -124,7 +124,7 @@ class _CurrentStarshipPageState extends State<CurrentStarshipPage> {
             Row(
               children: [
                 Text(
-                  '${starship.length}',
+                  starship.length,
                   style: openSansBoldText(fontSize: 14),
                 ),
                 Text(
@@ -141,10 +141,10 @@ class _CurrentStarshipPageState extends State<CurrentStarshipPage> {
                 _buildSpecsCard(
                   Icons.speed,
                   'Hyperdrive Rating',
-                  '${starship.hyperdriveRating}',
+                  starship.hyperdriveRating,
                 ),
                 _buildSpecsCard(
-                    CupertinoIcons.light_max, 'MGLT', '${starship.mglt}'),
+                    CupertinoIcons.light_max, 'MGLT', starship.mglt),
                 _buildSpecsCard(CupertinoIcons.speedometer, 'Max Speed',
                     starship.maxAtmospheringSpeed)
               ],
@@ -175,7 +175,7 @@ class _CurrentStarshipPageState extends State<CurrentStarshipPage> {
             const SizedBox(
               height: 12,
             ),
-            RelatedFilmsContainer()
+            const RelatedFilmsContainer()
           ],
         ),
       ),

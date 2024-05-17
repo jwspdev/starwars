@@ -1,8 +1,8 @@
 import 'package:star_wars_app/src/modules/home/domain/entities/base_entities/transpo_base_entity.dart';
 
 class StarshipEntity extends TranspoBaseEntity {
-  final double hyperdriveRating;
-  final double mglt;
+  final String hyperdriveRating;
+  final String mglt;
   final String starshipClass;
   const StarshipEntity({
     required this.hyperdriveRating,

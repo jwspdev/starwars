@@ -16,6 +16,22 @@ class _FilmCarouselState extends State<FilmCarousel>
     with AutomaticKeepAliveClientMixin {
   late final PageController _pageController;
   int _pageNo = 0;
+  late Timer _timer;
+
+  @override
+  void initState() {
+    _pageController = PageController(initialPage: 0, viewportFraction: 0.85);
+    _timer = getTimer();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    _timer.cancel();
+    super.dispose();
+  }
+
   Timer getTimer() {
     return Timer.periodic(const Duration(seconds: 3), (timer) {
       if (_pageNo == widget.films.length) {
@@ -25,19 +41,6 @@ class _FilmCarouselState extends State<FilmCarousel>
           duration: const Duration(seconds: 1), curve: Curves.easeInOutCirc);
       _pageNo++;
     });
-  }
-
-  @override
-  void initState() {
-    _pageController = PageController(initialPage: 0, viewportFraction: 0.85);
-    getTimer();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
   }
 
   @override

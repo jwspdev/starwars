@@ -8,7 +8,6 @@ import 'package:star_wars_app/src/modules/home/domain/entities/responses/list_st
 import 'package:star_wars_app/src/modules/home/domain/entities/starship_entity.dart';
 import 'package:star_wars_app/src/modules/home/domain/use_cases/starship/get_current_starship_use_case.dart';
 import 'package:star_wars_app/src/modules/home/domain/use_cases/starship/list_starship_use_case.dart';
-import 'package:star_wars_app/src/modules/home/presentation/blocs/person_bloc/person_bloc.dart';
 
 part 'starship_event.dart';
 part 'starship_state.dart';
