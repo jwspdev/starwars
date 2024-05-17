@@ -1,7 +1,12 @@
 import 'package:equatable/equatable.dart';
+import 'package:floor/floor.dart';
+import 'package:star_wars_app/src/core/utils/constants.dart';
 
+@Entity(tableName: PERSON_TABLE_NAME)
 class PersonEntity extends Equatable {
+  @PrimaryKey()
   final String? uniqueId;
+
   final String name;
   final double height;
   final double mass;
