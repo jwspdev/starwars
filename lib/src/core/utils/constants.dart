@@ -15,3 +15,8 @@ const List<String> NAVIGATION_TABS = [
   'Vehicles',
   'Planets'
 ];
+
+//local storage
+const String APP_DATABASE = 'app_database.db';
+const String PERSON_TABLE_NAME = 'person_table';
+const String FILM_TABLE_NAME = 'film_table';
