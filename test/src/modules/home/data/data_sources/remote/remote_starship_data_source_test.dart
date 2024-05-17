@@ -16,8 +16,8 @@ void main() {
   //starship api call tests
   group('starship api data source test', () {
     const testStarshipModel = Starship(
-        hyperdriveRating: 2.0,
-        mglt: 60,
+        hyperdriveRating: '2.0',
+        mglt: '60',
         starshipClass: "corvette",
         name: "CR90 corvette",
         model: "CR90 corvette",

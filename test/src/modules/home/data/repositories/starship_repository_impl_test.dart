@@ -49,8 +49,8 @@ void main() {
 
   group('starship repository test: get current starship\n\t', () {
     const testStarshipModel = StarshipEntity(
-        hyperdriveRating: 2.0,
-        mglt: 60,
+        hyperdriveRating: '2.0',
+        mglt: '60',
         starshipClass: "corvette",
         name: "CR90 corvette",
         model: "CR90 corvette",
