@@ -29,8 +29,8 @@ class Starship extends StarshipEntity {
     String uniqueId = "$STARSHIP_PATH$id";
     return Starship(
         uniqueId: uniqueId,
-        hyperdriveRating: double.parse(json['hyperdrive_rating']),
-        mglt: double.parse(json['MGLT']),
+        hyperdriveRating: json['hyperdrive_rating'],
+        mglt: json['MGLT'],
         starshipClass: json['starship_class'],
         name: json['name'],
         model: json['model'],

@@ -2,8 +2,9 @@ import 'package:star_wars_app/src/core/utils/constants.dart';
 import 'package:star_wars_app/src/core/utils/extensions/string_extensions.dart';
 import 'package:star_wars_app/src/modules/home/domain/entities/film_entity.dart';
 
+// ignore: must_be_immutable
 class Film extends FilmEntity {
-  const Film({
+  Film({
     super.uniqueId,
     required super.title,
     required super.episodeId,
