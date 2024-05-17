@@ -16,7 +16,7 @@ class FilmContainer extends StatelessWidget {
           return const CupertinoActivityIndicator();
         }
         if (state is ListOfFilmsLoaded) {
-          List<FilmEntity> films = state.films.results;
+          List<FilmEntity> films = state.films;
           return FilmCarousel(films: films);
         }
         if (state is FilmError) {
