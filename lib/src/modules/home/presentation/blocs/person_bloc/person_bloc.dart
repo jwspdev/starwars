@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:star_wars_app/src/core/resources/data_state.dart';
 import 'package:star_wars_app/src/core/utils/extensions/string_extensions.dart';
 
@@ -13,6 +12,7 @@ import 'package:star_wars_app/src/modules/home/domain/use_cases/person/list_peop
 part 'person_event.dart';
 part 'person_state.dart';
 
+//TODO FIX LOGIC OF USER LIKING
 class PersonBloc extends Bloc<PersonEvent, PersonState> {
   final GetCurrentPersonUseCase _getCurrentPersonUseCase;
   final ListPeopleUseCase _listPeopleUseCase;
@@ -30,7 +30,7 @@ class PersonBloc extends Bloc<PersonEvent, PersonState> {
     emit(PersonLoading());
     await Future.delayed(const Duration(seconds: 1));
     final result = await _listPeopleUseCase.call(params: event.pageNumber);
-    debugPrint('${result.data}');
+    // debugPrint('${result.data}');
 
     if (result is DataSuccess) {
       emit(ListOfPeopleLoaded(result: result.data!));
