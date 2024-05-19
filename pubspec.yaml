@@ -41,6 +41,7 @@ flutter:
   assets:
     - assets/images/no_image.jpg
     - assets/images/default_vehicle_image.png
+    - assets/images/space_background.jpg
   fonts:
   - family: OpenSans
     fonts:
