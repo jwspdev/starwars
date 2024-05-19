@@ -33,8 +33,7 @@ class _HomePageState extends State<HomePage> {
             create: (context) =>
                 sl()..add(const OnPeoplePageChanged(pageNumber: 1))),
         BlocProvider<VehicleBloc>(
-            create: (context) =>
-                sl()..add(const OnVehiclePageChanged(pageNumber: 1))),
+            create: (context) => sl()..add(const OnVehiclePageChanged())),
         BlocProvider<StarshipBloc>(
             create: (context) =>
                 sl()..add(const OnStarshipPageChanged(pageNumber: 1)))

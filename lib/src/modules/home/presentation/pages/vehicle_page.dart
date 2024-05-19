@@ -12,39 +12,66 @@ class VehiclePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<VehicleBloc, VehicleState>(builder: (context, state) {
+    VehicleBloc bloc = context.read<VehicleBloc>();
+    bool isSnackbarAlreadyShown = false;
+    return BlocConsumer<VehicleBloc, VehicleState>(listener: (context, state) {
+      if (bloc.hasEnded == true && !isSnackbarAlreadyShown) {
+        isSnackbarAlreadyShown = true;
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            duration: Duration(milliseconds: 500),
+            content: Text('no more data')));
+      }
+    }, builder: (context, state) {
       if (state is VehicleLoading) {
         return const Center(
           child: CupertinoActivityIndicator(),
         );
       }
-      if (state is VehiclesLoaded) {
-        return RefreshIndicator(
-          onRefresh: () async {
-            BlocProvider.of<VehicleBloc>(context)
-                .add(const OnVehiclePageChanged(pageNumber: 1));
-          },
-          child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: _buildVehicleListView(state.result.results)),
+      if (state is VehiclesLoaded || state is LoadMoreVehicles) {
+        final vehicles = state.result;
+        return SingleChildScrollView(
+          controller: bloc.scrollController,
+          child: Column(
+            children: [
+              RefreshIndicator(
+                onRefresh: () async {
+                  BlocProvider.of<VehicleBloc>(context).page = 1;
+                  BlocProvider.of<VehicleBloc>(context)
+                      .add(const OnVehiclePageChanged());
+                },
+                child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: _buildVehicleListView(vehicles, context, state)),
+              ),
+            ],
+          ),
         );
       }
       return Container();
     });
   }
 
-  Widget _buildVehicleListView(List<VehicleEntity> vehicles) {
+  Widget _buildVehicleListView(
+      List<VehicleEntity> vehicles, BuildContext context, VehicleState state) {
     return ListView.builder(
         shrinkWrap: true,
-        itemCount: vehicles.length,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount:
+            state is LoadMoreVehicles ? vehicles.length + 1 : vehicles.length,
         itemBuilder: (context, index) {
-          VehicleEntity vehicle = vehicles[index];
-          return GestureDetector(
-            onTap: () {
-              context.push(CurrentVehiclePage.routePath, extra: vehicle);
-            },
-            child: VehicleCard(vehicle: vehicle),
-          );
+          if (index < vehicles.length) {
+            VehicleEntity vehicle = vehicles[index];
+            return GestureDetector(
+              onTap: () {
+                context.push(CurrentVehiclePage.routePath, extra: vehicle);
+              },
+              child: VehicleCard(vehicle: vehicle),
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
         });
   }
 }
