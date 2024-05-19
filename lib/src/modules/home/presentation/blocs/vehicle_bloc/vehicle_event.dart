@@ -8,10 +8,10 @@ sealed class VehicleEvent extends Equatable {
 }
 
 class OnVehiclePageChanged extends VehicleEvent {
-  final int pageNumber;
-  const OnVehiclePageChanged({required this.pageNumber});
+  // final int pageNumber;
+  const OnVehiclePageChanged();
   @override
-  List<Object> get props => [pageNumber];
+  List<Object> get props => [];
 }
 
 class OnCurrentVehicleIdChanged extends VehicleEvent {
@@ -28,4 +28,8 @@ class OnGetVehiclesByIds extends VehicleEvent {
   const OnGetVehiclesByIds({required this.vehicleUrls});
   @override
   List<Object> get props => [vehicleUrls];
+}
+
+class OnLoadMoreVehicles extends VehicleEvent {
+  const OnLoadMoreVehicles();
 }
