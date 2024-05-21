@@ -16,7 +16,7 @@ class FilmEntity extends Equatable {
   final String releaseDate;
   final List<String>? characters;
   final String url;
-  final String? imageUrl;
+  String? imageUrl;
   int? rank;
 
   FilmEntity(

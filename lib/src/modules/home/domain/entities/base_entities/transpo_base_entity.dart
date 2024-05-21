@@ -16,8 +16,8 @@ abstract class TranspoBaseEntity extends Equatable {
   final List<String>? pilots;
   final List<String>? films;
   final String url;
-  final String? imageUrl;
-  const TranspoBaseEntity(
+  String? imageUrl;
+  TranspoBaseEntity(
       {this.uniqueId,
       required this.name,
       required this.model,

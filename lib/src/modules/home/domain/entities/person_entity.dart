@@ -7,9 +7,9 @@ class PersonEntity extends Equatable {
   @PrimaryKey()
   final String? uniqueId;
 
-  final String name;
-  final double height;
-  final double mass;
+  String name;
+  final String height;
+  final String mass;
   final String hairColor;
   final String skinColor;
   final String eyeColor;
@@ -19,9 +19,9 @@ class PersonEntity extends Equatable {
   final List<String>? vehicles;
   final List<String>? starships;
   final String url;
-  final String? imageUrl;
+  String? imageUrl;
 
-  const PersonEntity({
+  PersonEntity({
     this.uniqueId,
     required this.name,
     required this.height,

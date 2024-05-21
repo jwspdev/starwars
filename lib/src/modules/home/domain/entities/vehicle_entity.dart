@@ -2,7 +2,7 @@ import 'package:star_wars_app/src/modules/home/domain/entities/base_entities/tra
 
 class VehicleEntity extends TranspoBaseEntity {
   final String? vehicleClass;
-  const VehicleEntity({
+  VehicleEntity({
     super.uniqueId,
     required this.vehicleClass,
     required super.name,

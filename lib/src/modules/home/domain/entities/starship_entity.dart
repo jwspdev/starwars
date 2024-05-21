@@ -4,7 +4,7 @@ class StarshipEntity extends TranspoBaseEntity {
   final String hyperdriveRating;
   final String mglt;
   final String starshipClass;
-  const StarshipEntity({
+  StarshipEntity({
     required this.hyperdriveRating,
     required this.mglt,
     required this.starshipClass,
