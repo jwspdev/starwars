@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:star_wars_app/src/core/utils/custom_colors.dart';
 import 'package:star_wars_app/src/core/widgets/styles/custom_text_styles.dart';
 import 'package:star_wars_app/src/dependency_injection/injection_container.dart';
 import 'package:star_wars_app/src/modules/home/domain/entities/film_entity.dart';
@@ -50,6 +51,7 @@ class _RateFilmsPageState extends State<RateFilmsPage> {
   }
 
   Widget _buildReorderableFilmList(List<FilmEntity> films) {
+    List<FilmEntity> oldFilms = List.from(films);
     return ReorderableListView(
         padding: const EdgeInsets.all(12),
         onReorder: (int oldIndex, int newIndex) {
@@ -63,9 +65,10 @@ class _RateFilmsPageState extends State<RateFilmsPage> {
             for (int i = 0; i < films.length; i++) {
               FilmEntity currentFilm = films[i];
               currentFilm.rank = i + 1;
-              debugPrint('${currentFilm.title} ${currentFilm.rank}');
+              // debugPrint('${currentFilm.title} ${currentFilm.rank}');
             }
-            _updateFilmListOrder(films);
+
+            _updateFilmListOrder(oldFilms, films);
           });
         },
         children: <Widget>[
@@ -75,22 +78,18 @@ class _RateFilmsPageState extends State<RateFilmsPage> {
               elevation: 12,
               key: ValueKey('$i'),
               child: Padding(
-                padding: const EdgeInsets.only(right: 8, top: 4, bottom: 4),
+                padding:
+                    const EdgeInsets.only(right: 8, top: 4, bottom: 4, left: 4),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Stack(alignment: Alignment.center, children: [
-                      Icon(
-                        Icons.star,
-                        size: 64,
-                        color: _getStarColor(i),
+                    ReorderableDragStartListener(
+                      index: i,
+                      child: Icon(
+                        Icons.drag_handle,
+                        color: Colors.grey.shade400,
                       ),
-                      Text(
-                        '${i + 1}',
-                        style: openSansMedium(color: Colors.white, fontSize: 20)
-                            .merge(customOutlinedTextStyle()),
-                      )
-                    ]),
+                    ),
                     const SizedBox(
                       width: 4,
                     ),
@@ -101,27 +100,48 @@ class _RateFilmsPageState extends State<RateFilmsPage> {
                           borderRadius: BorderRadius.circular(16.0),
                         ),
                         child: ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
-                            child: Image.asset(
-                              'assets/images/no_image.jpg',
-                              fit: BoxFit.cover,
-                              width: double.infinity,
-                            ))),
+                          borderRadius: BorderRadius.circular(16),
+                          child: films[i].imageUrl == null
+                              ? Image.asset(
+                                  'assets/images/no_image.jpg',
+                                  fit: BoxFit.cover,
+                                  width: double.infinity,
+                                )
+                              : Image.network(
+                                  '${films[i].imageUrl}',
+                                  fit: BoxFit.cover,
+                                  alignment: Alignment.center,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Image.asset(
+                                      'assets/images/no_image.jpg',
+                                      fit: BoxFit.cover,
+                                      alignment: Alignment.center,
+                                    );
+                                  },
+                                ),
+                        )),
                     const SizedBox(
                       width: 12,
                     ),
                     Expanded(
                         child: Text(
                       films[i].title,
-                      style: openSansMedium(color: Colors.white, fontSize: 18),
+                      style: openSansMedium(color: Colors.white, fontSize: 16),
                     )),
-                    ReorderableDragStartListener(
-                      index: i,
-                      child: Icon(
-                        CupertinoIcons.move,
-                        color: Colors.grey.shade400,
+                    Row(children: [
+                      Icon(
+                        i == films.length - 1
+                            ? CupertinoIcons.trash_fill
+                            : Icons.star,
+                        size: 24,
+                        color: _getStarColor(i),
                       ),
-                    ),
+                      Text(
+                        '${i + 1}',
+                        style: openSansMedium(color: Colors.white, fontSize: 16)
+                            .merge(customOutlinedTextStyle()),
+                      ),
+                    ]),
                   ],
                 ),
               ),
@@ -129,25 +149,33 @@ class _RateFilmsPageState extends State<RateFilmsPage> {
         ]);
   }
 
-  void _updateFilmListOrder(List<FilmEntity> films) {
-    LocalFilmBloc bloc = LocalFilmBloc(sl());
-    bloc.add(OnSaveOrUpdateFilms(films: films));
+  void _updateFilmListOrder(List<FilmEntity> oldFilms, List<FilmEntity> films) {
+    bool isSame = true;
+    for (var i = 0; i < oldFilms.length; i++) {
+      if (oldFilms[i] != films[i]) {
+        isSame = false;
+        break;
+      }
+    }
+    if (isSame == false) {
+      LocalFilmBloc bloc = LocalFilmBloc(sl());
+      bloc.add(OnSaveOrUpdateFilms(films: films));
+    } else {
+      debugPrint('parehas');
+    }
   }
 
   Color _getStarColor(index) {
     if (index == 0) {
-      return Colors.amber;
+      return CustomColors.goldColor;
     }
     if (index == 1) {
-      return Colors.blueGrey;
-    }
-    if (index == 2) {
-      return Colors.brown.shade300;
+      return CustomColors.silverColor;
     }
     if (index >= 6) {
-      return Colors.red;
+      return CustomColors.trashColor;
     }
-    return Colors.grey;
+    return CustomColors.bronzeColor;
   }
 
   // Widget _buildFilmCard(FilmEntity film) {
