@@ -6,9 +6,11 @@ import 'package:star_wars_app/src/modules/home/domain/entities/starship_entity.d
 
 class StarshipCard extends StatelessWidget {
   final StarshipEntity starship;
+  final bool isLarge;
   const StarshipCard({
     super.key,
     required this.starship,
+    required this.isLarge,
   });
 
   @override
@@ -26,7 +28,16 @@ class StarshipCard extends StatelessWidget {
                 height: 88,
                 child: starship.imageUrl == null
                     ? Image.asset('assets/images/no_image.jpg')
-                    : Image.network(starship.imageUrl!),
+                    : Image.network(
+                        starship.imageUrl!,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.asset(
+                            'assets/images/no_image.jpg',
+                            fit: BoxFit.cover,
+                            alignment: Alignment.center,
+                          );
+                        },
+                      ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -40,14 +51,16 @@ class StarshipCard extends StatelessWidget {
                           style: openSansMedium(fontSize: 14),
                         ),
                       ),
-                      SizedBox(
-                        width: 180,
-                        child: Text(
-                          starship.model,
-                          style:
-                              openSansRegular(fontSize: 12, color: Colors.grey),
-                        ),
-                      ),
+                      isLarge
+                          ? SizedBox(
+                              width: 180,
+                              child: Text(
+                                starship.model,
+                                style: openSansRegular(
+                                    fontSize: 12, color: Colors.grey),
+                              ),
+                            )
+                          : Container(),
                       SizedBox(
                         width: 180,
                         child: Text(
