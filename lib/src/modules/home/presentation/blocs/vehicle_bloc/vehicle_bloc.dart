@@ -15,7 +15,7 @@ class VehicleBloc extends Bloc<VehicleEvent, VehicleState> {
   final GetCurrentVehicleUseCase _getCurrentVehicleUseCase;
   final ListVehiclesUseCase _listVehiclesUseCase;
   int page = 1;
-  bool hasEnded = false;
+  bool canLoadMore = true;
   ScrollController scrollController = ScrollController();
   VehicleBloc(this._getCurrentVehicleUseCase, this._listVehiclesUseCase)
       : super(VehicleInitial()) {
@@ -45,25 +45,28 @@ class VehicleBloc extends Bloc<VehicleEvent, VehicleState> {
   _onLoadMoreVehicles(
       OnLoadMoreVehicles event, Emitter<VehicleState> emit) async {
     if (scrollController.position.pixels ==
-        scrollController.position.maxScrollExtent) {
+            scrollController.position.maxScrollExtent &&
+        canLoadMore) {
       emit(LoadMoreVehicles(
         result: state.result,
       ));
+      await Future.delayed(const Duration(seconds: 2));
       page++;
+
       final result = await _listVehiclesUseCase.call(params: page);
-      // emit(VehiclesLoaded(result: result.data.results));
-      ListVehicleResponseEntity? listVehicleResponseEntity = result.data;
-      List<VehicleEntity> vehicleList =
-          listVehicleResponseEntity?.results ?? [];
+      if (result is DataSuccess) {
+        ListVehicleResponseEntity? listVehicleResponseEntity = result.data;
+        List<VehicleEntity> vehicleList =
+            listVehicleResponseEntity?.results ?? [];
 
-      debugPrint('${listVehicleResponseEntity?.next}');
+        debugPrint('${listVehicleResponseEntity?.next}');
 
-      emit(VehiclesLoaded(
-        result: [...state.result, ...vehicleList],
-      ));
-      if (listVehicleResponseEntity?.next == null) {
-        hasEnded = true;
+        emit(VehiclesLoaded(
+          result: [...state.result, ...vehicleList],
+        ));
+        canLoadMore = listVehicleResponseEntity?.next != null;
       }
+      // emit(VehiclesLoaded(result: result.data.results));
     }
   }
 
@@ -75,7 +78,7 @@ class VehicleBloc extends Bloc<VehicleEvent, VehicleState> {
     Exception? exception;
     debugPrint('${event.vehicleUrls}');
     if (event.vehicleUrls.isEmpty) {
-      emit(VehicleByIdsLoaded(vehicles: []));
+      emit(VehicleByIdsLoaded(vehicles: const []));
       return;
     }
     for (var vehicle in event.vehicleUrls) {

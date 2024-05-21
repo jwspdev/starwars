@@ -1,45 +1,56 @@
 part of 'person_bloc.dart';
 
 sealed class PersonState extends Equatable {
-  const PersonState();
+  final List<PersonEntity> people;
+  const PersonState({required this.people});
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [people];
 }
 
-final class PersonInitial extends PersonState {}
+final class PersonInitial extends PersonState {
+  PersonInitial() : super(people: []);
+}
 
-final class PersonLoading extends PersonState {}
+final class PersonLoading extends PersonState {
+  PersonLoading() : super(people: []);
+}
 
 final class ListOfPeopleLoaded extends PersonState {
-  final ListPeopleResponseEntity result;
-
-  const ListOfPeopleLoaded({required this.result});
+  const ListOfPeopleLoaded({required super.people});
   @override
-  List<Object> get props => [result];
+  List<Object> get props => [people];
 }
 
 final class CurrentPersonLoaded extends PersonState {
   final PersonEntity result;
 
-  const CurrentPersonLoaded({required this.result});
+  CurrentPersonLoaded({required this.result}) : super(people: []);
   @override
   List<Object> get props => [result];
 }
 
 final class PeopleByIdsLoaded extends PersonState {
-  final List<PersonEntity> peopleList;
-
-  const PeopleByIdsLoaded({required this.peopleList});
+  const PeopleByIdsLoaded({required super.people});
   @override
-  List<Object> get props => [peopleList];
+  List<Object> get props => [people];
 }
 
 final class PersonError extends PersonState {
   final Exception exception;
 
-  const PersonError({required this.exception});
+  PersonError({required this.exception}) : super(people: []);
 
   @override
   List<Object> get props => [exception];
+}
+
+final class LoadMorePeople extends PersonState {
+  const LoadMorePeople({required super.people});
+  @override
+  List<Object> get props => [people];
+}
+
+final class NoMorePeople extends PersonState {
+  NoMorePeople() : super(people: []);
 }

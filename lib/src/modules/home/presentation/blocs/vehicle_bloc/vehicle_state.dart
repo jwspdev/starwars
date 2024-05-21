@@ -45,7 +45,3 @@ final class LoadMoreVehicles extends VehicleState {
   @override
   List<Object> get props => [result];
 }
-
-final class NoMoreVehicles extends VehicleState {
-  NoMoreVehicles() : super(result: []);
-}
