@@ -3,7 +3,7 @@ import 'package:star_wars_app/src/core/utils/extensions/string_extensions.dart';
 import 'package:star_wars_app/src/modules/home/domain/entities/starship_entity.dart';
 
 class Starship extends StarshipEntity {
-  const Starship(
+  Starship(
       {super.uniqueId,
       required super.hyperdriveRating,
       required super.mglt,
@@ -26,7 +26,7 @@ class Starship extends StarshipEntity {
   //from json mapper
   factory Starship.fromJson(Map<String, dynamic> json) {
     String id = json['url'].toString().getIdFromUrl();
-    String uniqueId = "$STARSHIP_PATH$id";
+    String uniqueId = "starship_$id";
     return Starship(
         uniqueId: uniqueId,
         hyperdriveRating: json['hyperdrive_rating'],

@@ -1,4 +1,3 @@
-import 'package:star_wars_app/src/core/utils/constants.dart';
 import 'package:star_wars_app/src/core/utils/extensions/string_extensions.dart';
 import 'package:star_wars_app/src/modules/home/domain/entities/film_entity.dart';
 
@@ -20,7 +19,7 @@ class Film extends FilmEntity {
   //from json mapper
   factory Film.fromJson(Map<String, dynamic> json) {
     String id = json['url'].toString().getIdFromUrl();
-    String uniqueId = "$FILM_PATH$id";
+    String uniqueId = "film_$id";
     return Film(
         uniqueId: uniqueId,
         title: json['title'] ?? '',

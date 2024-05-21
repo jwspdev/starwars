@@ -9,7 +9,7 @@ import 'package:star_wars_app/src/modules/home/domain/entities/starship_entity.d
 import '../../../../../helpers/json_reader.dart';
 
 void main() {
-  const testStarshipModel = StarshipEntity(
+  var testStarshipModel = StarshipEntity(
       hyperdriveRating: '2.0',
       mglt: '60',
       starshipClass: "corvette",
