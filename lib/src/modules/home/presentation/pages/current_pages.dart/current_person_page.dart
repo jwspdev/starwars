@@ -24,12 +24,12 @@ class CurrentPersonPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var currentPerson = person;
     Map<String, String> firstRow = {
-      "Height": "${currentPerson.height}",
-      "Mass": "${currentPerson.mass}"
+      "Height": currentPerson.height,
+      "Mass": currentPerson.mass
     };
     Map<String, String> secondRow = {
       "Hair Color": currentPerson.hairColor,
-      "Skin Color": "${currentPerson.mass}"
+      "Skin Color": currentPerson.mass
     };
 
     Map<String, String> thirdRow = {
@@ -69,7 +69,18 @@ class CurrentPersonPage extends StatelessWidget {
                           fit: BoxFit.cover,
                           alignment: Alignment.center,
                         )
-                      : Image.network('${currentPerson.imageUrl}'),
+                      : Image.network(
+                          '${currentPerson.imageUrl}',
+                          fit: BoxFit.cover,
+                          alignment: Alignment.center,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Image.asset(
+                              'assets/images/no_image.jpg',
+                              fit: BoxFit.cover,
+                              alignment: Alignment.center,
+                            );
+                          },
+                        ),
                   Positioned(
                       child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -142,6 +153,10 @@ class CurrentPersonPage extends StatelessWidget {
                         height: 8,
                       ),
                       Text(
+                        currentPerson.uniqueId!,
+                        style: openSansExtraBoldText(fontSize: 24),
+                      ),
+                      Text(
                         currentPerson.name,
                         style: openSansExtraBoldText(fontSize: 24),
                       ),
@@ -167,10 +182,13 @@ class CurrentPersonPage extends StatelessWidget {
                         padding: EdgeInsets.all(8.0),
                       ),
                       const RelatedVehicleContainer(),
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
+                      Container(
+                        height: 12,
                       ),
-                      const RelatedStarshipContainer()
+                      const RelatedStarshipContainer(),
+                      Container(
+                        height: kBottomNavigationBarHeight,
+                      )
                     ],
                   ),
                 ),

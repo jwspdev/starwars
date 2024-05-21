@@ -25,6 +25,12 @@ class CurrentStarshipPage extends StatefulWidget {
 
 class _CurrentStarshipPageState extends State<CurrentStarshipPage> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     StarshipEntity currentStarship = widget.starship;
     return MultiBlocProvider(
@@ -37,41 +43,44 @@ class _CurrentStarshipPageState extends State<CurrentStarshipPage> {
                 ..add(OnGetMultiplePeople(urls: currentStarship.pilots ?? []))),
         ],
         child: Scaffold(
-            body: SizedBox(
-          width: double.maxFinite,
-          height: double.maxFinite,
-          child: Stack(children: [
-            Positioned(
-              child: Container(
-                  color: Colors.black,
-                  width: double.infinity,
-                  height: MediaQuery.of(context).size.height / 2,
-                  child: SafeArea(
-                    child: Image.asset(
-                      'assets/images/default_vehicle_image.png',
-                    ),
-                  )),
-            ),
-            Positioned(
-              top: MediaQuery.of(context).size.height / 2.5,
-              child: Container(
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
-                  color: Colors.white,
+            backgroundColor: Colors.white,
+            body: CustomScrollView(slivers: [
+              SliverAppBar(
+                backgroundColor: Colors.white,
+                elevation: 0,
+                pinned: true,
+                centerTitle: false,
+                stretch: true,
+                expandedHeight: MediaQuery.of(context).size.height / 2.5,
+                flexibleSpace: FlexibleSpaceBar(
+                  stretchModes: const [StretchMode.zoomBackground],
+                  background: LayoutBuilder(
+                      builder: (context, BoxConstraints constraints) {
+                    return SafeArea(
+                      child: Image.asset(
+                        'assets/images/default_vehicle_image.png',
+                        fit: BoxFit.fitHeight,
+                      ),
+                    );
+                  }),
                 ),
-                width: MediaQuery.of(context).size.width,
-                height: 500,
-                child: _buildStarshipDetails(currentStarship),
               ),
-            ),
-          ]),
-        )));
+              SliverList(
+                  delegate: SliverChildListDelegate([
+                _buildStarshipDetails(currentStarship),
+              ]))
+            ])));
   }
 
   Widget _buildStarshipDetails(StarshipEntity starship) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: SingleChildScrollView(
+    return Container(
+      decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(24), topRight: Radius.circular(24)),
+          border: Border(top: BorderSide(color: Colors.grey))),
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -82,7 +91,6 @@ class _CurrentStarshipPageState extends State<CurrentStarshipPage> {
                   starship.name,
                   style: openSansExtraBoldText(fontSize: 24),
                 ),
-                // Icon(CupertinoIcons.coin)
               ],
             ),
             Text(
@@ -121,18 +129,6 @@ class _CurrentStarshipPageState extends State<CurrentStarshipPage> {
             const SizedBox(
               height: 8,
             ),
-            Row(
-              children: [
-                Text(
-                  starship.length,
-                  style: openSansBoldText(fontSize: 14),
-                ),
-                Text(
-                  ' meters',
-                  style: openSansMedium(fontSize: 14),
-                ),
-              ],
-            ),
             const SizedBox(
               height: 8,
             ),
@@ -165,8 +161,41 @@ class _CurrentStarshipPageState extends State<CurrentStarshipPage> {
                     starship.cargoCapacity)
               ],
             ),
-            const SizedBox(
-              height: 8,
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 8.0, right: 8.0, top: 20, bottom: 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        'Size: ',
+                        style: openSansBoldText(),
+                      ),
+                      Text(
+                        '${starship.length} meters',
+                        style: openSansMedium(fontSize: 14),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 4,
+                  ),
+                  Wrap(
+                    children: [
+                      Text(
+                        'Manufactured by: ',
+                        style: openSansBoldText(),
+                      ),
+                      Text(
+                        starship.manufacturer,
+                        style: openSansMedium(fontSize: 14),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
             const SizedBox(
               height: 12,
@@ -175,7 +204,7 @@ class _CurrentStarshipPageState extends State<CurrentStarshipPage> {
             const SizedBox(
               height: 12,
             ),
-            const RelatedFilmsContainer()
+            const RelatedFilmsContainer(),
           ],
         ),
       ),
@@ -185,6 +214,8 @@ class _CurrentStarshipPageState extends State<CurrentStarshipPage> {
   Expanded _buildSpecsCard(IconData iconData, String header, String value) {
     return Expanded(
       child: Card(
+        elevation: 6,
+        color: Colors.white,
         child: SizedBox(
           height: 80,
           child: Padding(

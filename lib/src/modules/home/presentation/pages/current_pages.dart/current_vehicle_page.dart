@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:star_wars_app/src/core/widgets/styles/custom_text_styles.dart';
 import 'package:star_wars_app/src/dependency_injection/injection_container.dart';
 
@@ -10,7 +11,6 @@ import 'package:star_wars_app/src/modules/home/presentation/blocs/person_bloc/pe
 import 'package:star_wars_app/src/modules/home/presentation/widgets/film_widgets/related_films_container.dart';
 import 'package:star_wars_app/src/modules/home/presentation/widgets/people_widgets/related_people_container.dart';
 
-//TODO FIX SPACE BETWEEN RELATED CONTAINERS' TITLE AND THEIR LISTS (ILLOGICAL BUG)...
 class CurrentVehiclePage extends StatefulWidget {
   static String routePath = '/vehicle';
   final VehicleEntity vehicle;
@@ -59,13 +59,22 @@ class _CurrentVehiclePageState extends State<CurrentVehiclePage> {
                                 )
                               : Image.network('${currentVehicle.imageUrl}'),
                         ),
+                        Positioned(
+                          left: 8,
+                          child: GestureDetector(
+                            onTap: () => context.pop(),
+                            child: const Icon(
+                              CupertinoIcons.back,
+                            ),
+                          ),
+                        )
                       ],
                     ),
                   ),
                 ),
                 _buildVehicleUi(currentVehicle),
                 const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 4),
+                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                   child: Column(children: [
                     SizedBox(
                         width: double.infinity,
@@ -74,8 +83,8 @@ class _CurrentVehiclePageState extends State<CurrentVehiclePage> {
                         width: double.infinity, child: RelatedFilmsContainer()),
                   ]),
                 ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 8,
+                const SizedBox(
+                  height: kBottomNavigationBarHeight * 2,
                 )
               ],
             ),
@@ -87,37 +96,39 @@ class _CurrentVehiclePageState extends State<CurrentVehiclePage> {
             right: 0.0,
             child: Padding(
               padding: const EdgeInsets.all(24),
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: Colors.grey.shade300),
-                width: double.infinity,
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Price in Credits',
-                            style: openSansMedium(),
-                          ),
-                          Text(
-                            currentVehicle.costInCredits,
-                            style: openSansBoldText(fontSize: 28),
-                          )
-                        ],
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Icon(
-                          CupertinoIcons.heart,
-                          size: 36,
+              child: Material(
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.grey.shade300),
+                  width: double.infinity,
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Price in Credits',
+                              style: openSansMedium(),
+                            ),
+                            Text(
+                              currentVehicle.costInCredits,
+                              style: openSansBoldText(fontSize: 28),
+                            )
+                          ],
                         ),
-                      )
-                    ],
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Icon(
+                            CupertinoIcons.heart,
+                            size: 36,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -140,10 +151,6 @@ class _CurrentVehiclePageState extends State<CurrentVehiclePage> {
             vehicle.model,
             style: openSansBoldText(fontSize: 20),
           ),
-          Text(
-            'Manufactured by: ${vehicle.manufacturer}',
-            style: openSansMedium(fontSize: 14),
-          ),
           const SizedBox(
             height: 12,
           ),
@@ -163,7 +170,22 @@ class _CurrentVehiclePageState extends State<CurrentVehiclePage> {
               _buildSpecsCard(
                   'max speed', '${vehicle.maxAtmospheringSpeed} km/h'),
             ],
-          )
+          ),
+          const SizedBox(
+            height: 12,
+          ),
+          Wrap(
+            children: [
+              Text(
+                'Manufactured by: ',
+                style: openSansBoldText(),
+              ),
+              Text(
+                vehicle.manufacturer,
+                style: openSansMedium(fontSize: 14),
+              ),
+            ],
+          ),
         ],
       ),
     );
@@ -171,6 +193,7 @@ class _CurrentVehiclePageState extends State<CurrentVehiclePage> {
 
   Widget _buildSpecsCard(String header, String value) {
     return Card(
+      elevation: 4,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
@@ -182,7 +205,7 @@ class _CurrentVehiclePageState extends State<CurrentVehiclePage> {
             ),
             Text(
               value,
-              style: openSansMedium(fontSize: 16, color: Colors.grey),
+              style: openSansMedium(fontSize: 16, color: Colors.grey.shade600),
             ),
           ],
         ),
