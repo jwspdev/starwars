@@ -23,9 +23,77 @@ class _PeopleListState extends State<PeopleList> {
       if (state is PersonLoading) {
         return const CupertinoActivityIndicator();
       }
-      if (state is ListOfPeopleLoaded) {
-        List<PersonEntity> personList = state.result.results;
-        return _buildGridView(personList);
+      if (state is ListOfPeopleLoaded || state is LoadMorePeople) {
+        List<PersonEntity> personList = state.people;
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: GridView.builder(
+              primary: false,
+              shrinkWrap: true,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, mainAxisSpacing: 8, crossAxisSpacing: 8),
+              itemCount: state is LoadMorePeople
+                  ? personList.length + 1
+                  : personList.length,
+              itemBuilder: (context, index) {
+                if (index < personList.length) {
+                  var currentPerson = personList[index];
+                  return GestureDetector(
+                    onTap: () {
+                      context.push(CurrentPersonPage.routePath,
+                          extra: currentPerson);
+                    },
+                    child: Card(
+                      elevation: 8,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      color: Colors.grey,
+                      child: Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: currentPerson.imageUrl == null
+                                ? Image.asset(
+                                    'assets/images/no_image.jpg',
+                                    fit: BoxFit.cover,
+                                    alignment: Alignment.center,
+                                  )
+                                : Image.network(
+                                    '${currentPerson.imageUrl}',
+                                    fit: BoxFit.cover,
+                                    alignment: Alignment.center,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Image.asset(
+                                        'assets/images/no_image.jpg',
+                                        fit: BoxFit.cover,
+                                        alignment: Alignment.center,
+                                      );
+                                    },
+                                  ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              currentPerson.name,
+                              style: openSansMedium(color: Colors.white)
+                                  .merge(customOutlinedTextStyle()),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                } else {
+                  if (state is NoMorePeople) {
+                    return const Text('no more data');
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              }),
+        );
       }
       if (state is PersonError) {
         return Text('Error: ${state.exception}');
@@ -33,54 +101,5 @@ class _PeopleListState extends State<PeopleList> {
 
       return const Text('default');
     });
-  }
-
-  _buildGridView(List<PersonEntity> personList) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: GridView.builder(
-          primary: false,
-          shrinkWrap: true,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2, mainAxisSpacing: 8, crossAxisSpacing: 8),
-          itemCount: personList.length,
-          itemBuilder: (context, index) {
-            var currentPerson = personList[index];
-            return GestureDetector(
-              onTap: () {
-                context.push(CurrentPersonPage.routePath, extra: currentPerson);
-              },
-              child: Card(
-                elevation: 8,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                color: Colors.grey,
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: currentPerson.imageUrl == null
-                          ? Image.asset(
-                              'assets/images/no_image.jpg',
-                              fit: BoxFit.cover,
-                              alignment: Alignment.center,
-                            )
-                          : Image.network('${currentPerson.imageUrl}'),
-                    ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        currentPerson.name,
-                        style: openSansMedium(color: Colors.white)
-                            .merge(customOutlinedTextStyle()),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            );
-          }),
-    );
   }
 }
