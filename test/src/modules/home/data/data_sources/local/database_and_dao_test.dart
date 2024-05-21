@@ -22,11 +22,11 @@ void main() {
 
   test('test dao', () async {
     // final
-    const person = PersonEntity(
+    var person = PersonEntity(
         uniqueId: 'person/125',
         name: 'test name',
-        height: 12,
-        mass: 12,
+        height: '12',
+        mass: '12',
         hairColor: 'blonde',
         skinColor: 'fair',
         eyeColor: 'green',

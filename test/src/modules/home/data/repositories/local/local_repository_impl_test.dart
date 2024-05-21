@@ -18,11 +18,11 @@ void main() {
   });
 
   group('test repository methods\n', () {
-    const person = PersonEntity(
+    var person = PersonEntity(
         uniqueId: 'person/125',
         name: 'test name',
-        height: 12,
-        mass: 12,
+        height: '12',
+        mass: '12',
         hairColor: 'blonde',
         skinColor: 'fair',
         eyeColor: 'green',
@@ -30,11 +30,11 @@ void main() {
         gender: 'male',
         url: 'test_url',
         films: ['test', 'test2', 'test3']);
-    const person2 = PersonEntity(
+    var person2 = PersonEntity(
         uniqueId: 'person/126',
         name: 'test name',
-        height: 12,
-        mass: 12,
+        height: '12',
+        mass: '12',
         hairColor: 'blonde',
         skinColor: 'fair',
         eyeColor: 'green',

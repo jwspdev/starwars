@@ -19,10 +19,10 @@ void main() {
     peopleRepositoryImpl = PeopleRepositoryImpl(dataSource);
   });
 
-  const testPersonModel = Person(
+  var testPersonModel = Person(
     name: "Luke Skywalker",
-    height: 172,
-    mass: 77,
+    height: '172',
+    mass: '77',
     hairColor: "blond",
     skinColor: "fair",
     eyeColor: 'blue',
@@ -46,10 +46,10 @@ void main() {
     ],
   );
 
-  const testPersonEntity = PersonEntity(
+  var testPersonEntity = PersonEntity(
     name: "Luke Skywalker",
-    height: 172,
-    mass: 77,
+    height: '172',
+    mass: '77',
     hairColor: "blond",
     skinColor: "fair",
     eyeColor: 'blue',
