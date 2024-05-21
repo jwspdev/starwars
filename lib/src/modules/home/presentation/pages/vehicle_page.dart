@@ -7,48 +7,49 @@ import 'package:star_wars_app/src/modules/home/presentation/blocs/vehicle_bloc/v
 import 'package:star_wars_app/src/modules/home/presentation/pages/current_pages.dart/current_vehicle_page.dart';
 import 'package:star_wars_app/src/modules/home/presentation/widgets/vehicle_widgets/vehicle_card.dart';
 
-class VehiclePage extends StatelessWidget {
+class VehiclePage extends StatefulWidget {
   const VehiclePage({super.key});
 
   @override
+  State<VehiclePage> createState() => _VehiclePageState();
+}
+
+class _VehiclePageState extends State<VehiclePage>
+    with AutomaticKeepAliveClientMixin {
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     VehicleBloc bloc = context.read<VehicleBloc>();
-    bool isSnackbarAlreadyShown = false;
-    return BlocConsumer<VehicleBloc, VehicleState>(listener: (context, state) {
-      if (bloc.hasEnded == true && !isSnackbarAlreadyShown) {
-        isSnackbarAlreadyShown = true;
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            duration: Duration(milliseconds: 500),
-            content: Text('no more data')));
-      }
-    }, builder: (context, state) {
-      if (state is VehicleLoading) {
-        return const Center(
-          child: CupertinoActivityIndicator(),
-        );
-      }
-      if (state is VehiclesLoaded || state is LoadMoreVehicles) {
-        final vehicles = state.result;
-        return SingleChildScrollView(
-          controller: bloc.scrollController,
-          child: Column(
-            children: [
-              RefreshIndicator(
-                onRefresh: () async {
-                  BlocProvider.of<VehicleBloc>(context).page = 1;
-                  BlocProvider.of<VehicleBloc>(context)
-                      .add(const OnVehiclePageChanged());
-                },
-                child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: _buildVehicleListView(vehicles, context, state)),
+    return BlocConsumer<VehicleBloc, VehicleState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          if (state is VehicleLoading) {
+            return const Center(
+              child: CupertinoActivityIndicator(),
+            );
+          }
+          if (state is VehiclesLoaded || state is LoadMoreVehicles) {
+            final vehicles = state.result;
+            return SingleChildScrollView(
+              controller: bloc.scrollController,
+              child: Column(
+                children: [
+                  RefreshIndicator(
+                    onRefresh: () async {
+                      BlocProvider.of<VehicleBloc>(context).page = 1;
+                      BlocProvider.of<VehicleBloc>(context)
+                          .add(const OnVehiclePageChanged());
+                    },
+                    child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: _buildVehicleListView(vehicles, context, state)),
+                  ),
+                ],
               ),
-            ],
-          ),
-        );
-      }
-      return Container();
-    });
+            );
+          }
+          return Container();
+        });
   }
 
   Widget _buildVehicleListView(
@@ -65,7 +66,10 @@ class VehiclePage extends StatelessWidget {
               onTap: () {
                 context.push(CurrentVehiclePage.routePath, extra: vehicle);
               },
-              child: VehicleCard(vehicle: vehicle),
+              child: VehicleCard(
+                vehicle: vehicle,
+                isLarge: true,
+              ),
             );
           } else {
             return const Center(
@@ -74,4 +78,8 @@ class VehiclePage extends StatelessWidget {
           }
         });
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

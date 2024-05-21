@@ -14,14 +14,16 @@ class _PeoplePageState extends State<PeoplePage>
     with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
+    PersonBloc bloc = context.read<PersonBloc>();
     super.build(context);
     return RefreshIndicator(
       onRefresh: () async {
-        BlocProvider.of<PersonBloc>(context)
-            .add(const OnPeoplePageChanged(pageNumber: 1));
+        BlocProvider.of<PersonBloc>(context).add(const OnPeoplePageChanged());
+        bloc.page = 1;
       },
-      child: const SingleChildScrollView(
-        child: Column(
+      child: SingleChildScrollView(
+        controller: bloc.scrollController,
+        child: const Column(
           children: [
             FilmContainer(),
             PeopleList(),
