@@ -10,6 +10,7 @@ import 'package:star_wars_app/src/modules/home/data/models/vehicle.dart';
 import 'package:star_wars_app/src/modules/home/domain/entities/responses/list_vehicle_response_entity.dart';
 import 'package:star_wars_app/src/modules/home/domain/entities/vehicle_entity.dart';
 import 'package:star_wars_app/src/modules/home/domain/repositories/vehicle_repository.dart';
+import 'package:http/http.dart' as http;
 
 class VehicleRepositoryImpl implements VehicleRepository {
   final RemoteVehicleDataSourceImpl _remoteVehicleDataSourceImpl;
@@ -41,8 +42,16 @@ class VehicleRepositoryImpl implements VehicleRepository {
       final HttpResponse<ListVehicleResponse> response =
           await _remoteVehicleDataSourceImpl.listVehicles(pageNumber);
       if (response.response.statusCode == HttpStatus.ok) {
-        final listVehicleResponse = response.data;
-        return DataSuccess(listVehicleResponse.toEntity());
+        ListVehicleResponse data = response.data;
+        await Future.forEach(data.results, (vehicle) async {
+          var imageUrl =
+              'https://firebasestorage.googleapis.com/v0/b/star-wars-project-deae7.appspot.com/o/${vehicle.uniqueId}.jpeg?alt=media&token=99bbd36a-e9b2-4244-b325-45e11ceadb9d';
+          final response = await http.head(Uri.parse(imageUrl));
+          if (response.statusCode == 200) {
+            vehicle.imageUrl = imageUrl;
+          }
+        });
+        return DataSuccess(data.toEntity());
       } else {
         return DataFailure(DioException(
             error: response.response.statusMessage,
