@@ -48,15 +48,16 @@ class _LandingPageState extends State<LandingPage> {
       floatingActionButton: Visibility(
           visible: _selectedIndex == 1,
           child: FloatingActionButton.extended(
+              backgroundColor: CustomColors.primaryColor,
+              foregroundColor: Colors.white,
               label: Row(
                 children: [
                   const Icon(
                     CupertinoIcons.film,
-                    color: Colors.black,
                   ),
                   Text(
                     '  Rank Films',
-                    style: openSansMedium(),
+                    style: openSansMedium(color: Colors.white),
                   )
                 ],
               ),
@@ -77,8 +78,9 @@ class _LandingPageState extends State<LandingPage> {
               height: kBottomNavigationBarHeight,
               child: InkWell(
                 child: Icon(
-                  Icons.home,
-                  color: _selectedIndex == 0 ? Colors.black : Colors.white,
+                  Icons.home_filled,
+                  size: _selectedIndex == 0 ? 32 : 24,
+                  color: _selectedIndex == 0 ? Colors.amber : Colors.white,
                 ),
                 onTap: () {
                   setState(() {
@@ -94,7 +96,8 @@ class _LandingPageState extends State<LandingPage> {
               child: InkWell(
                 child: Icon(
                   CupertinoIcons.heart_fill,
-                  color: _selectedIndex == 1 ? Colors.black : Colors.white,
+                  size: _selectedIndex == 1 ? 32 : 24,
+                  color: _selectedIndex == 1 ? Colors.amber : Colors.white,
                 ),
                 onTap: () {
                   setState(() {
