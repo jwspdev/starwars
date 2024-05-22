@@ -21,7 +21,7 @@ The Star Wars Repository is a meticulously crafted application, developed using 
 * [dio](https://pub.dev/packages/dio): Http Networking package.
 
 ## Getting Started
-To get started with the Abracadabra Mayhem (Magic App), you'll need to have Flutter installed on your machine. If you haven't already, you can follow the instructions on the [official Flutter website](https://docs.flutter.dev/get-started/install) to install Flutter.
+To get started with the starwars, you'll need to have Flutter installed on your machine. If you haven't already, you can follow the instructions on the [official Flutter website](https://docs.flutter.dev/get-started/install) to install Flutter.
 Once Flutter is installed, follow these steps to run the Magic App:
 
 1. **Clone the repository:**
