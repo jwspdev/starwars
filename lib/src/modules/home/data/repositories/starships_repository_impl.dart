@@ -45,10 +45,14 @@ class StarshipRepositoryImpl implements StarshipRepository {
         ListStarshipsResponse data = response.data;
         await Future.forEach(data.results, (starship) async {
           var imageUrl =
-              'https://firebasestorage.googleapis.com/v0/b/star-wars-project-deae7.appspot.com/o/${starship.uniqueId}.jpeg?alt=media&token=99bbd36a-e9b2-4244-b325-45e11ceadb9d';
+              'https://firebasestorage.googleapis.com/v0/b/star-wars-project-deae7.appspot.com/o/${starship.uniqueId}.png?alt=media&token=5a6f2555-4e54-46e2-a76a-309266bb0e97';
           final response = await http.head(Uri.parse(imageUrl));
           if (response.statusCode == 200) {
-            starship.imageUrl = imageUrl;
+            var updatedStarship = starship.copyWith(imageUrl: imageUrl);
+            var index = data.results.indexOf(starship);
+            if (index >= 0) {
+              data.results[index] = updatedStarship;
+            }
           }
         });
         return DataSuccess(data.toEntity());

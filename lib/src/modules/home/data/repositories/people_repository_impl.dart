@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -53,7 +52,11 @@ class PeopleRepositoryImpl implements PeopleRepository {
               'https://firebasestorage.googleapis.com/v0/b/star-wars-project-deae7.appspot.com/o/${person.uniqueId}.jpeg?alt=media&token=99bbd36a-e9b2-4244-b325-45e11ceadb9d';
           final response = await http.head(Uri.parse(imageUrl));
           if (response.statusCode == 200) {
-            person.imageUrl = imageUrl;
+            var currentPerson = person.copyWith(imageUrl: imageUrl);
+            var index = data.results.indexOf(person);
+            if (index >= 0) {
+              data.results[index] = currentPerson;
+            }
           }
         });
         return DataSuccess(data.toEntity());

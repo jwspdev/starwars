@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -45,10 +44,14 @@ class VehicleRepositoryImpl implements VehicleRepository {
         ListVehicleResponse data = response.data;
         await Future.forEach(data.results, (vehicle) async {
           var imageUrl =
-              'https://firebasestorage.googleapis.com/v0/b/star-wars-project-deae7.appspot.com/o/${vehicle.uniqueId}.jpeg?alt=media&token=99bbd36a-e9b2-4244-b325-45e11ceadb9d';
+              'https://firebasestorage.googleapis.com/v0/b/star-wars-project-deae7.appspot.com/o/${vehicle.uniqueId}.png?alt=media&token=99bbd36a-e9b2-4244-b325-45e11ceadb9d';
           final response = await http.head(Uri.parse(imageUrl));
           if (response.statusCode == 200) {
-            vehicle.imageUrl = imageUrl;
+            var updatedVehicle = vehicle.copyWith(imageUrl: imageUrl);
+            var index = data.results.indexOf(vehicle);
+            if (index >= 0) {
+              data.results[index] = updatedVehicle;
+            }
           }
         });
         return DataSuccess(data.toEntity());
