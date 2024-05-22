@@ -2,6 +2,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:floor/floor.dart';
 import 'package:star_wars_app/src/core/utils/constants.dart';
+import 'package:star_wars_app/src/modules/home/data/models/film.dart';
 
 @Entity(tableName: FILM_TABLE_NAME)
 class FilmEntity extends Equatable {
@@ -16,10 +17,10 @@ class FilmEntity extends Equatable {
   final String releaseDate;
   final List<String>? characters;
   final String url;
-  String? imageUrl;
-  int? rank;
+  final String? imageUrl;
+  final int? rank;
 
-  FilmEntity(
+  const FilmEntity(
       {this.uniqueId,
       required this.title,
       required this.episodeId,
@@ -45,4 +46,35 @@ class FilmEntity extends Equatable {
         url,
         rank,
       ];
+
+  FilmEntity copyWith({String? imageUrl, int? rank}) {
+    return FilmEntity(
+        uniqueId: uniqueId,
+        title: title,
+        episodeId: episodeId,
+        openingCrawl: openingCrawl,
+        director: director,
+        producer: producer,
+        releaseDate: releaseDate,
+        characters: characters,
+        url: url,
+        imageUrl: imageUrl ?? this.imageUrl,
+        rank: rank ?? this.rank);
+  }
+
+  //used for some testing, not used again
+  //good to have it here as a backup
+  Film toModel() => Film(
+        uniqueId: uniqueId,
+        title: title,
+        episodeId: episodeId,
+        openingCrawl: openingCrawl,
+        director: director,
+        producer: producer,
+        releaseDate: releaseDate,
+        characters: characters,
+        url: url,
+        imageUrl: imageUrl,
+        rank: rank,
+      );
 }
