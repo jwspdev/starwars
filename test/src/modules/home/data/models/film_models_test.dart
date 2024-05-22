@@ -10,7 +10,7 @@ import 'package:star_wars_app/src/modules/home/domain/entities/responses/list_fi
 import '../../../../../helpers/json_reader.dart';
 
 void main() {
-  Film testFilmModel = Film(
+  Film testFilmModel = const Film(
       uniqueId: "${FILM_PATH}1",
       title: "A New Hope",
       episodeId: 4,
@@ -19,7 +19,7 @@ void main() {
       director: "George Lucas",
       producer: "Gary Kurtz, Rick McCallum",
       releaseDate: "1977-05-25",
-      characters: const [
+      characters: [
         "https://swapi.py4e.com/api/people/1/",
         "https://swapi.py4e.com/api/people/2/",
         "https://swapi.py4e.com/api/people/3/",
@@ -40,7 +40,7 @@ void main() {
         "https://swapi.py4e.com/api/people/81/"
       ],
       url: "https://swapi.py4e.com/api/films/1/");
-  FilmEntity testFilmEntity = FilmEntity(
+  FilmEntity testFilmEntity = const FilmEntity(
       title: "A New Hope",
       episodeId: 4,
       openingCrawl:
@@ -48,7 +48,7 @@ void main() {
       director: "George Lucas",
       producer: "Gary Kurtz, Rick McCallum",
       releaseDate: "1977-05-25",
-      characters: const [
+      characters: [
         "https://swapi.py4e.com/api/people/1/",
         "https://swapi.py4e.com/api/people/2/",
         "https://swapi.py4e.com/api/people/3/",

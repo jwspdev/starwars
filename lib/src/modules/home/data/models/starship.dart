@@ -1,9 +1,8 @@
-import 'package:star_wars_app/src/core/utils/constants.dart';
 import 'package:star_wars_app/src/core/utils/extensions/string_extensions.dart';
 import 'package:star_wars_app/src/modules/home/domain/entities/starship_entity.dart';
 
 class Starship extends StarshipEntity {
-  Starship(
+  const Starship(
       {super.uniqueId,
       required super.hyperdriveRating,
       required super.mglt,

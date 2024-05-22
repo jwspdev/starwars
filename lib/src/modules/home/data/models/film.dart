@@ -3,7 +3,7 @@ import 'package:star_wars_app/src/modules/home/domain/entities/film_entity.dart'
 
 // ignore: must_be_immutable
 class Film extends FilmEntity {
-  Film({
+  const Film({
     super.uniqueId,
     required super.title,
     required super.episodeId,
@@ -14,6 +14,7 @@ class Film extends FilmEntity {
     super.characters,
     required super.url,
     super.imageUrl,
+    super.rank,
   });
 
   //from json mapper

@@ -3,7 +3,7 @@ import 'package:star_wars_app/src/modules/home/domain/entities/person_entity.dar
 
 // ignore: must_be_immutable
 class Person extends PersonEntity {
-  Person(
+  const Person(
       {super.uniqueId,
       required super.name,
       required super.height,

@@ -1,9 +1,8 @@
-import 'package:star_wars_app/src/core/utils/constants.dart';
 import 'package:star_wars_app/src/core/utils/extensions/string_extensions.dart';
 import 'package:star_wars_app/src/modules/home/domain/entities/vehicle_entity.dart';
 
 class Vehicle extends VehicleEntity {
-  Vehicle(
+  const Vehicle(
       {super.uniqueId,
       required super.vehicleClass,
       required super.name,
@@ -47,6 +46,7 @@ class Vehicle extends VehicleEntity {
   }
   //to entity converter
   VehicleEntity toEntity() => VehicleEntity(
+      uniqueId: uniqueId,
       vehicleClass: vehicleClass,
       name: name,
       model: model,

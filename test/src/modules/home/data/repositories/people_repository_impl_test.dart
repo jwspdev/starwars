@@ -19,7 +19,7 @@ void main() {
     peopleRepositoryImpl = PeopleRepositoryImpl(dataSource);
   });
 
-  var testPersonModel = Person(
+  var testPersonModel = const Person(
     name: "Luke Skywalker",
     height: '172',
     mass: '77',
@@ -46,7 +46,7 @@ void main() {
     ],
   );
 
-  var testPersonEntity = PersonEntity(
+  var testPersonEntity = const PersonEntity(
     name: "Luke Skywalker",
     height: '172',
     mass: '77',

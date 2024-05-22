@@ -15,7 +15,7 @@ void main() {
     initializeDependencies();
     dataSource = RemoteVehicleDataSourceImpl(apiService: sl());
   });
-  var testVehicleModel = Vehicle(
+  var testVehicleModel = const Vehicle(
       vehicleClass: "wheeled",
       name: "Sand Crawler",
       model: "Digger Crawler",
@@ -33,7 +33,7 @@ void main() {
         "https://swapi.py4e.com/api/films/5/"
       ],
       url: "https://swapi.py4e.com/api/vehicles/4/");
-  var testVehicleEntity = VehicleEntity(
+  var testVehicleEntity = const VehicleEntity(
       vehicleClass: "wheeled",
       name: "Sand Crawler",
       model: "Digger Crawler",
