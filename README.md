@@ -1,5 +1,5 @@
 # StarWars App
-The Star Wars Repository is a meticulously crafted application, developed using the Flutter framework, designed to serve as a comprehensive repository of information pertaining to the renowned Star Wars franchise. This meticulously curated repository offers users a detailed exploration of key elements within the Star Wars universe, including individuals, vehicles, starships, and cinematic productions.
+The Star Wars Repository is a meticulously crafted application, developed using the Flutter framework, designed to serve as a comprehensive repository of information pertaining to the renowned Star Wars franchise. This meticulously curated repository offers users a detailed exploration of key elements within the Star Wars universe, including individuals, vehicles, starships, and cinematic productions. The data comes from https://swapi.py4e.com/
 ## Features
 - **Read Data from API**
 - **Store Films to Local Storage**
