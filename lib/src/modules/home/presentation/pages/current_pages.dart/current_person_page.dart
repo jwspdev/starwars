@@ -39,7 +39,6 @@ class CurrentPersonPage extends StatelessWidget {
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) {
-        debugPrint('$didPop');
         _onPopPage(context);
       },
       child: MultiBlocProvider(
@@ -202,9 +201,7 @@ class CurrentPersonPage extends StatelessWidget {
 
   _onPopPage(BuildContext context) {
     context.read<LocalPeopleBloc>().add(OnCheckLikedPerson(person: person));
-    // debugPrint('$x');
     final state = context.read<LocalPeopleBloc>().state;
-    // debugPrint('${state}');
     if (state is IsPersonDisliked) {
       context.pop('disliked');
     } else {

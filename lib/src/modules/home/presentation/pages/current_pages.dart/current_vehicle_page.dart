@@ -44,6 +44,7 @@ class _CurrentVehiclePageState extends State<CurrentVehiclePage> {
               children: [
                 Container(
                   width: double.infinity,
+                  height: MediaQuery.of(context).size.height / 2.5,
                   decoration: const BoxDecoration(
                       color: Colors.amber,
                       borderRadius:
@@ -57,7 +58,11 @@ class _CurrentVehiclePageState extends State<CurrentVehiclePage> {
                                   'assets/images/default_vehicle_image.png',
                                   scale: 6,
                                 )
-                              : Image.network('${currentVehicle.imageUrl}'),
+                              : Image.network(
+                                  '${currentVehicle.imageUrl}',
+                                  // scale: 4,
+                                  // fit: BoxFit.fitHeight,
+                                ),
                         ),
                         Positioned(
                           left: 8,
@@ -91,7 +96,7 @@ class _CurrentVehiclePageState extends State<CurrentVehiclePage> {
           ),
         ),
         Positioned(
-            bottom: 0.0,
+            bottom: kBottomNavigationBarHeight * 0.5,
             left: 0.0,
             right: 0.0,
             child: Padding(

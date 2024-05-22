@@ -43,9 +43,10 @@ class _CurrentStarshipPageState extends State<CurrentStarshipPage> {
                 ..add(OnGetMultiplePeople(urls: currentStarship.pilots ?? []))),
         ],
         child: Scaffold(
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.black,
             body: CustomScrollView(slivers: [
               SliverAppBar(
+                foregroundColor: Colors.blueGrey,
                 backgroundColor: Colors.white,
                 elevation: 0,
                 pinned: true,
@@ -57,11 +58,25 @@ class _CurrentStarshipPageState extends State<CurrentStarshipPage> {
                   background: LayoutBuilder(
                       builder: (context, BoxConstraints constraints) {
                     return SafeArea(
-                      child: Image.asset(
-                        'assets/images/default_vehicle_image.png',
-                        fit: BoxFit.fitHeight,
-                      ),
-                    );
+                        child: Container(
+                      color: Colors.black,
+                      child: currentStarship.imageUrl == null
+                          ? Image.asset(
+                              'assets/images/no_image.jpg',
+                              fit: BoxFit.fitHeight,
+                            )
+                          : Image.network(
+                              currentStarship.imageUrl!,
+                              // fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Image.asset(
+                                  'assets/images/no_image.jpg',
+                                  fit: BoxFit.fitHeight,
+                                  alignment: Alignment.center,
+                                );
+                              },
+                            ),
+                    ));
                   }),
                 ),
               ),
