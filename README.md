@@ -6,7 +6,10 @@ The Star Wars Repository is a meticulously crafted application, developed using 
 - **Read Films from Local Storage**
 - **Update Films Rank from Local Storage**
 # Screenshots
-
+![home_vehicles](https://github.com/jwspdev/starwars/assets/63495554/66ea4195-3019-4bfd-898a-6fe4c83b5e30)
+![home_starship](https://github.com/jwspdev/starwars/assets/63495554/4fabb478-522b-4d32-9738-02737fa82f02)
+![home_people](https://github.com/jwspdev/starwars/assets/63495554/1f5e3041-2545-467e-958a-6a01786681d2)
+..MORE IMAGES WILL COME...
 ## Architecture
 - **Presentation**: Contains the user interface and presentation logic. Uses >flutter_bloc for managing state and >go_router for navigation.
 - **Domain**: Contains the core business logic (repository and entities) and use cases. It is independent of any external frameworks or libraries.
@@ -36,3 +39,7 @@ flutter pub get
 ```bash
 flutter run
 ```
+## ISSUES:
+- The images uploaded comes from my personal cloud storage because the data from https://swapi.py4e.com/ doesn't contain images.
+  It is very unoptimal as what I did is to add image urls to each model, validate if the imageurl doesn't produce any error, then saves the image url for the models.
+  THIS IS FOR SHOWING WHAT THE APP WILL LOOK LIKE ONLY. MODIFICATIONS WILL BE MADE. HEHE 
