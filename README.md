@@ -44,3 +44,4 @@ flutter run
   It is very unoptimal as what I did is to add image urls to each model, validate if the imageurl doesn't produce any error, then saves the image url for the models.
   THIS IS FOR SHOWING WHAT THE APP WILL LOOK LIKE IF IMAGES ARE PRESENT.
   MODIFICATIONS WILL BE MADE. HEHE 
+- Another issue is to cache images, will be implemented soon.
