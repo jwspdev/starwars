@@ -22,7 +22,7 @@ void main() {
 
   test('test dao', () async {
     // final
-    var person = PersonEntity(
+    var person = const PersonEntity(
         uniqueId: 'person/125',
         name: 'test name',
         height: '12',
@@ -41,7 +41,7 @@ void main() {
   });
 
   group('test local film\n', () {
-    FilmEntity filmEntity = FilmEntity(
+    FilmEntity filmEntity = const FilmEntity(
         uniqueId: 'id1',
         title: 'UNA',
         episodeId: 4,
@@ -51,8 +51,8 @@ void main() {
         releaseDate: 'releaseDate',
         url: 'url',
         rank: 2,
-        characters: const ['test char1', 'test char2']);
-    FilmEntity filmEntity2 = FilmEntity(
+        characters: ['test char1', 'test char2']);
+    FilmEntity filmEntity2 = const FilmEntity(
         uniqueId: 'id2',
         title: 'pangalawa',
         rank: 1,
@@ -62,7 +62,7 @@ void main() {
         producer: 'producer',
         releaseDate: 'releaseDate',
         url: 'url',
-        characters: const ['test char1', 'test char2']);
+        characters: ['test char1', 'test char2']);
     List<FilmEntity> films = [filmEntity, filmEntity2];
     test('should print database instance', () {
       debugPrint('${database.database}');
@@ -87,7 +87,7 @@ void main() {
     test('should update ranks of films', () async {
       // List<FilmEntity> newFilms = [];
       for (var film in films) {
-        film.rank = 5;
+        film.copyWith(rank: 5);
         // if (!newFilms.contains(film)) {
         //   newFilms.add(film);
         // }
@@ -102,7 +102,7 @@ void main() {
     });
     test('should update a single note', () async {
       FilmEntity film = filmEntity;
-      film.rank = 5;
+      film.copyWith(rank: 5);
       debugPrint('$film');
       await filmDao.updateFilm(film);
       final result = await filmDao.findFilmById('id1');
