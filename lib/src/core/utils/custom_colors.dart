@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomColors {
-  static const Color primaryColor = Color.fromRGBO(30, 54, 137, 1);
+  static const Color primaryColor = Color.fromRGBO(36, 65, 173, 1);
   static const Color tertiaryColor = Color.fromRGBO(49, 102, 163, 1);
 
   //star colors for film ranking
