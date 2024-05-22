@@ -4,7 +4,8 @@ import 'package:star_wars_app/src/modules/home/domain/entities/vehicle_entity.da
 
 class VehicleCard extends StatelessWidget {
   final VehicleEntity vehicle;
-  const VehicleCard({super.key, required this.vehicle});
+  final bool isLarge;
+  const VehicleCard({super.key, required this.vehicle, required this.isLarge});
 
   @override
   Widget build(BuildContext context) {
@@ -28,14 +29,16 @@ class VehicleCard extends StatelessWidget {
                           style: openSansMedium(fontSize: 16),
                         ),
                       ),
-                      SizedBox(
-                        width: 120,
-                        child: Text(
-                          vehicle.model,
-                          style:
-                              openSansRegular(fontSize: 12, color: Colors.grey),
-                        ),
-                      ),
+                      isLarge
+                          ? SizedBox(
+                              width: 120,
+                              child: Text(
+                                vehicle.model,
+                                style: openSansRegular(
+                                    fontSize: 12, color: Colors.grey),
+                              ),
+                            )
+                          : Container(),
                       SizedBox(
                         width: 180,
                         child: Text(
@@ -50,7 +53,14 @@ class VehicleCard extends StatelessWidget {
                 height: 88,
                 child: vehicle.imageUrl == null
                     ? Image.asset('assets/images/no_image.jpg')
-                    : Image.network(vehicle.imageUrl!),
+                    : Image.network(
+                        vehicle.imageUrl!,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.asset(
+                            'assets/images/no_image.jpg',
+                          );
+                        },
+                      ),
               )
             ],
           )),

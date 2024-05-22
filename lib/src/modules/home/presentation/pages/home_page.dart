@@ -30,14 +30,11 @@ class _HomePageState extends State<HomePage> {
       providers: [
         BlocProvider<FilmBloc>(create: (context) => sl()..add(OnGetFilms())),
         BlocProvider<PersonBloc>(
-            create: (context) =>
-                sl()..add(const OnPeoplePageChanged(pageNumber: 1))),
+            create: (context) => sl()..add(const OnPeoplePageChanged())),
         BlocProvider<VehicleBloc>(
-            create: (context) =>
-                sl()..add(const OnVehiclePageChanged(pageNumber: 1))),
+            create: (context) => sl()..add(const OnVehiclePageChanged())),
         BlocProvider<StarshipBloc>(
-            create: (context) =>
-                sl()..add(const OnStarshipPageChanged(pageNumber: 1)))
+            create: (context) => sl()..add(const OnStarshipPageChanged()))
       ],
       child: Column(
         children: [

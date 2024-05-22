@@ -20,6 +20,26 @@ class VehicleEntity extends TranspoBaseEntity {
     required super.url,
     super.imageUrl,
   });
+  VehicleEntity copyWith({String? imageUrl}) {
+    return VehicleEntity(
+        uniqueId: uniqueId,
+        vehicleClass: vehicleClass,
+        name: name,
+        model: model,
+        manufacturer: manufacturer,
+        costInCredits: costInCredits,
+        length: length,
+        maxAtmospheringSpeed: maxAtmospheringSpeed,
+        crew: crew,
+        passengers: passengers,
+        cargoCapacity: cargoCapacity,
+        consumables: consumables,
+        pilots: pilots,
+        films: films,
+        url: url,
+        imageUrl: imageUrl ?? this.imageUrl);
+  }
+
   @override
   List<Object?> get props => super.props..add(vehicleClass);
 }

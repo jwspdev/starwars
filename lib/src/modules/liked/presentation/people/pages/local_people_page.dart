@@ -15,18 +15,6 @@ class LocalPeoplePage extends StatefulWidget {
 
 class _LocalPeoplePageState extends State<LocalPeoplePage> {
   @override
-  void initState() {
-    super.initState();
-    debugPrint('INITIALIZED');
-  }
-
-  @override
-  void dispose() {
-    debugPrint('DISPOSED');
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return BlocConsumer<LocalPeopleBloc, LocalPeopleState>(
         listener: (context, state) {
@@ -37,6 +25,11 @@ class _LocalPeoplePageState extends State<LocalPeoplePage> {
       if (state is LocalPeopleLoading) {
         return const Center(
           child: CupertinoActivityIndicator(),
+        );
+      }
+      if (state is LocalPeopleLoaded && state.peopleList.isEmpty) {
+        return const Center(
+          child: Text('There are no Liked People Yet!'),
         );
       }
       if (state is LocalPeopleLoaded) {
@@ -76,7 +69,10 @@ class _LocalPeoplePageState extends State<LocalPeoplePage> {
                                 fit: BoxFit.cover,
                                 alignment: Alignment.center,
                               )
-                            : Image.network('${currentPerson.imageUrl}'),
+                            : Image.network(
+                                '${currentPerson.imageUrl}',
+                                fit: BoxFit.cover,
+                              ),
                       ),
                       Align(
                         alignment: Alignment.center,

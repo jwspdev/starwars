@@ -24,9 +24,6 @@ class LocalFilmBloc extends Bloc<LocalFilmEvent, LocalFilmState> {
     emit(LocalFilmLoading());
     List<FilmEntity> films =
         await _filmLocalRepository.getOrderedFilms(event.order);
-    for (var film in films) {
-      debugPrint('${film.title} ${film.rank}');
-    }
     emit(LocalFilmsLoaded(films: films));
   }
 
@@ -34,7 +31,6 @@ class LocalFilmBloc extends Bloc<LocalFilmEvent, LocalFilmState> {
       OnSaveOrUpdateFilms event, Emitter<LocalFilmState> emit) async {
     try {
       await _filmLocalRepository.updateFilmEntities(event.films);
-      debugPrint('success');
     } catch (e) {
       debugPrint('$e');
     }

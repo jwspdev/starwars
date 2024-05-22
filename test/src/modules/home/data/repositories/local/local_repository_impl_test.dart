@@ -18,11 +18,11 @@ void main() {
   });
 
   group('test repository methods\n', () {
-    const person = PersonEntity(
+    var person = const PersonEntity(
         uniqueId: 'person/125',
         name: 'test name',
-        height: 12,
-        mass: 12,
+        height: '12',
+        mass: '12',
         hairColor: 'blonde',
         skinColor: 'fair',
         eyeColor: 'green',
@@ -30,11 +30,11 @@ void main() {
         gender: 'male',
         url: 'test_url',
         films: ['test', 'test2', 'test3']);
-    const person2 = PersonEntity(
+    var person2 = const PersonEntity(
         uniqueId: 'person/126',
         name: 'test name',
-        height: 12,
-        mass: 12,
+        height: '12',
+        mass: '12',
         hairColor: 'blonde',
         skinColor: 'fair',
         eyeColor: 'green',
@@ -58,7 +58,7 @@ void main() {
     });
   });
   group('test film repository impl', () {
-    FilmEntity filmEntity = FilmEntity(
+    FilmEntity filmEntity = const FilmEntity(
         uniqueId: 'film/1',
         title: 'test title',
         episodeId: 4,
@@ -67,8 +67,8 @@ void main() {
         producer: 'producer',
         releaseDate: 'releaseDate',
         url: 'url',
-        characters: const ['test char1', 'test char2']);
-    FilmEntity filmEntity2 = FilmEntity(
+        characters: ['test char1', 'test char2']);
+    FilmEntity filmEntity2 = const FilmEntity(
         uniqueId: 'film/2',
         title: 'test title',
         episodeId: 4,
@@ -77,7 +77,7 @@ void main() {
         producer: 'producer',
         releaseDate: 'releaseDate',
         url: 'url',
-        characters: const ['test char1', 'test char2']);
+        characters: ['test char1', 'test char2']);
     List<FilmEntity> films = [filmEntity, filmEntity2];
     test('should use film dao\'s get all films', () async {
       final result = await filmRepo.getAllFilms();

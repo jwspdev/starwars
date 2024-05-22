@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:star_wars_app/src/core/widgets/styles/custom_text_styles.dart';
 import 'package:star_wars_app/src/modules/home/domain/entities/film_entity.dart';
 import 'package:star_wars_app/src/modules/home/presentation/blocs/film_bloc/film_bloc.dart';
+import 'package:star_wars_app/src/modules/home/presentation/widgets/no_data_widget.dart';
 
 class RelatedFilmsContainer extends StatelessWidget {
   const RelatedFilmsContainer({super.key});
@@ -23,43 +24,55 @@ class RelatedFilmsContainer extends StatelessWidget {
           }
           if (state is FilmsByIdLoaded && state.films.isNotEmpty) {
             List<FilmEntity>? films = state.films;
-            return GridView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  mainAxisSpacing: 4,
-                  crossAxisSpacing: 4,
-                ),
-                itemCount: films.length,
-                itemBuilder: (context, index) {
-                  return Card(
-                    color: Colors.black,
-                    child: Padding(
-                      padding: const EdgeInsets.all(1.0),
-                      child: Stack(
+            return SizedBox(
+              height: 220,
+              child: ListView.separated(
+                  separatorBuilder: (context, index) {
+                    return const SizedBox(
+                      width: 16,
+                    );
+                  },
+                  padding: const EdgeInsets.all(4),
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: films.length,
+                  itemBuilder: (context, index) {
+                    return SizedBox(
+                      width: 120,
+                      child: Column(
                         children: [
-                          films[index].imageUrl == null
-                              ? ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.asset(
-                                    'assets/images/no_image.jpg',
-                                    fit: BoxFit.cover,
-                                    width: double.infinity,
-                                    height: double.infinity,
-                                  ),
-                                )
-                              : Image.network(films[index].imageUrl!),
+                          SizedBox(
+                            height: 140,
+                            width: 140,
+                            child: films[index].imageUrl == null
+                                ? ClipRRect(
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(8)),
+                                    child: Image.asset(
+                                      'assets/images/no_image.jpg',
+                                      fit: BoxFit.cover,
+                                    ),
+                                  )
+                                : Image.network(films[index].imageUrl!),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              films[index].title,
+                              style: openSansBoldText(fontSize: 14),
+                              textAlign: TextAlign.center,
+                            ),
+                          )
                         ],
                       ),
-                    ),
-                  );
-                });
+                    );
+                  }),
+            );
           }
           if (state is FilmsByIdLoaded && state.films.isEmpty) {
             return const Center(
-              child: Text('no films'),
-            );
+                child: NoDataWidget(
+                    icon: Icons.movie_filter, message: 'No Movie Found'));
           }
           return Container();
         }),

@@ -12,7 +12,7 @@ import 'package:star_wars_app/src/modules/home/domain/entities/vehicle_entity.da
 import '../../../../../helpers/json_reader.dart';
 
 void main() {
-  const testVehicleModel = Vehicle(
+  var testVehicleModel = const Vehicle(
       vehicleClass: "wheeled",
       name: "Sand Crawler",
       model: "Digger Crawler",
@@ -31,7 +31,7 @@ void main() {
       ],
       url: "https://swapi.py4e.com/api/vehicles/4/");
 
-  const testVehicleEntity = VehicleEntity(
+  var testVehicleEntity = const VehicleEntity(
       vehicleClass: "wheeled",
       name: "Sand Crawler",
       model: "Digger Crawler",

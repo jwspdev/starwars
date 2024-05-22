@@ -9,6 +9,7 @@ import 'package:star_wars_app/src/modules/home/data/models/starship.dart';
 import 'package:star_wars_app/src/modules/home/domain/entities/responses/list_starship_response_entity.dart';
 import 'package:star_wars_app/src/modules/home/domain/entities/starship_entity.dart';
 import 'package:star_wars_app/src/modules/home/domain/repositories/starship_repository.dart';
+import 'package:http/http.dart' as http;
 
 class StarshipRepositoryImpl implements StarshipRepository {
   final RemoteStarshipDataSourceImpl _remoteStarshipDataSourceImpl;
@@ -41,8 +42,20 @@ class StarshipRepositoryImpl implements StarshipRepository {
       final HttpResponse<ListStarshipsResponse> response =
           await _remoteStarshipDataSourceImpl.listStarships(pageNumber);
       if (response.response.statusCode == HttpStatus.ok) {
-        final listStarshipResponse = response.data;
-        return DataSuccess(listStarshipResponse.toEntity());
+        ListStarshipsResponse data = response.data;
+        await Future.forEach(data.results, (starship) async {
+          var imageUrl =
+              'https://firebasestorage.googleapis.com/v0/b/star-wars-project-deae7.appspot.com/o/${starship.uniqueId}.png?alt=media&token=5a6f2555-4e54-46e2-a76a-309266bb0e97';
+          final response = await http.head(Uri.parse(imageUrl));
+          if (response.statusCode == 200) {
+            var updatedStarship = starship.copyWith(imageUrl: imageUrl);
+            var index = data.results.indexOf(starship);
+            if (index >= 0) {
+              data.results[index] = updatedStarship;
+            }
+          }
+        });
+        return DataSuccess(data.toEntity());
       } else {
         return DataFailure(DioException(
             error: response.response.statusMessage,

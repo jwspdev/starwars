@@ -12,10 +12,10 @@ import 'package:star_wars_app/src/modules/home/domain/entities/person_entity.dar
 import '../../../../../helpers/json_reader.dart';
 
 void main() {
-  const testPersonModel = Person(
+  var testPersonModel = const Person(
     name: "Luke Skywalker",
-    height: 172,
-    mass: 77,
+    height: '172',
+    mass: '77',
     hairColor: "blond",
     skinColor: "fair",
     eyeColor: 'blue',

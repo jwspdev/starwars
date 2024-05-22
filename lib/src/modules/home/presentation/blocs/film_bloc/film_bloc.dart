@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:star_wars_app/src/core/resources/data_state.dart';
 import 'package:star_wars_app/src/core/utils/extensions/string_extensions.dart';
 import 'package:star_wars_app/src/modules/home/domain/entities/film_entity.dart';
@@ -32,15 +33,14 @@ class FilmBloc extends Bloc<FilmEvent, FilmState> {
     if (apiResult is DataSuccess) {
       if (apiFilms!.length > localResult.length) {
         for (int i = 0; i < apiFilms.length; i++) {
+          debugPrint('${apiFilms[i].imageUrl}');
           FilmEntity currentFilm = apiFilms[i];
-          currentFilm.rank ??= i + 1;
+          currentFilm.copyWith(rank: currentFilm.rank ?? i + 1);
         }
         await _filmLocalRepository.insertListOfFilms(apiFilms);
       }
       final newLocalResult = await _filmLocalRepository.getAllFilms();
-      // for (var film in newLocalResult) {
-      //   debugPrint('${film.rank}');
-      // }
+
       emit(ListOfFilmsLoaded(films: newLocalResult));
     } else {
       emit(FilmError(exception: apiResult.exception!));

@@ -8,11 +8,9 @@ sealed class PersonEvent extends Equatable {
 }
 
 class OnPeoplePageChanged extends PersonEvent {
-  final int pageNumber;
-
-  const OnPeoplePageChanged({required this.pageNumber});
+  const OnPeoplePageChanged();
   @override
-  List<Object> get props => [pageNumber];
+  List<Object> get props => [];
 }
 
 class OnCurrentPersonIdChanged extends PersonEvent {
@@ -30,4 +28,8 @@ class OnGetMultiplePeople extends PersonEvent {
   const OnGetMultiplePeople({required this.urls});
   @override
   List<Object> get props => [urls];
+}
+
+class OnLoadMorePeople extends PersonEvent {
+  const OnLoadMorePeople();
 }

@@ -16,9 +16,11 @@ class OnGetStarshipsByIds extends StarshipEvent {
 }
 
 class OnStarshipPageChanged extends StarshipEvent {
-  final int pageNumber;
-
-  const OnStarshipPageChanged({required this.pageNumber});
+  const OnStarshipPageChanged();
   @override
-  List<Object> get props => [pageNumber];
+  List<Object> get props => [];
+}
+
+class OnLoadMoreStarships extends StarshipEvent {
+  const OnLoadMoreStarships();
 }

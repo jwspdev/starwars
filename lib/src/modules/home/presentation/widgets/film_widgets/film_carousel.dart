@@ -16,6 +16,7 @@ class _FilmCarouselState extends State<FilmCarousel>
     with AutomaticKeepAliveClientMixin {
   late final PageController _pageController;
   int _pageNo = 0;
+
   late Timer _timer;
 
   @override
@@ -82,6 +83,22 @@ class _FilmCarouselState extends State<FilmCarousel>
             itemCount: widget.films.length,
           ),
         ),
+        const SizedBox(
+          height: 12,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(
+              widget.films.length,
+              (index) => Container(
+                    margin: const EdgeInsets.all(2.0),
+                    child: Icon(
+                      Icons.circle,
+                      size: 12.0,
+                      color: _pageNo == index ? Colors.amber : Colors.grey,
+                    ),
+                  )),
+        )
       ],
     );
   }
@@ -95,11 +112,25 @@ class _FilmCarouselState extends State<FilmCarousel>
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(24),
-              child: Image.asset(
-                'assets/images/no_image.jpg',
-                fit: BoxFit.cover,
-                width: double.infinity,
-              ),
+              child: film.imageUrl == null
+                  ? Image.asset(
+                      'assets/images/no_image.jpg',
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                    )
+                  : Image.network(
+                      '${film.imageUrl}',
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Image.asset(
+                          'assets/images/no_image.jpg',
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          alignment: Alignment.center,
+                        );
+                      },
+                    ),
             ),
             Align(
               alignment: Alignment.bottomCenter,

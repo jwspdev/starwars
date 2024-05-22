@@ -14,22 +14,57 @@ part 'vehicle_state.dart';
 class VehicleBloc extends Bloc<VehicleEvent, VehicleState> {
   final GetCurrentVehicleUseCase _getCurrentVehicleUseCase;
   final ListVehiclesUseCase _listVehiclesUseCase;
+  int page = 1;
+  bool canLoadMore = true;
+  ScrollController scrollController = ScrollController();
   VehicleBloc(this._getCurrentVehicleUseCase, this._listVehiclesUseCase)
       : super(VehicleInitial()) {
+    scrollController.addListener(() {
+      add(const OnLoadMoreVehicles());
+    });
     on<VehicleEvent>((event, emit) {});
     on<OnGetVehiclesByIds>(_onGetVehiclesByIds);
     on<OnVehiclePageChanged>(_onVehiclePageChanged);
+    on<OnLoadMoreVehicles>(_onLoadMoreVehicles);
   }
 
   _onVehiclePageChanged(
       OnVehiclePageChanged event, Emitter<VehicleState> emit) async {
     emit(VehicleLoading());
-    final result = await _listVehiclesUseCase.call(params: event.pageNumber);
+    final result = await _listVehiclesUseCase.call(params: page);
     if (result is DataSuccess) {
-      emit(VehiclesLoaded(result: result.data));
+      emit(VehiclesLoaded(
+        result: result.data.results,
+      ));
     }
     if (result is DataFailure) {
       emit(VehicleError(exception: result.exception!));
+    }
+  }
+
+  _onLoadMoreVehicles(
+      OnLoadMoreVehicles event, Emitter<VehicleState> emit) async {
+    if (scrollController.position.pixels ==
+            scrollController.position.maxScrollExtent &&
+        canLoadMore) {
+      emit(LoadMoreVehicles(
+        result: state.result,
+      ));
+      await Future.delayed(const Duration(seconds: 2));
+      page++;
+
+      final result = await _listVehiclesUseCase.call(params: page);
+      if (result is DataSuccess) {
+        ListVehicleResponseEntity? listVehicleResponseEntity = result.data;
+        List<VehicleEntity> vehicleList =
+            listVehicleResponseEntity?.results ?? [];
+
+        emit(VehiclesLoaded(
+          result: [...state.result, ...vehicleList],
+        ));
+        canLoadMore = listVehicleResponseEntity?.next != null;
+      }
+      // emit(VehiclesLoaded(result: result.data.results));
     }
   }
 
@@ -39,9 +74,8 @@ class VehicleBloc extends Bloc<VehicleEvent, VehicleState> {
     List<int> ids = [];
     List<VehicleEntity> vehicleList = [];
     Exception? exception;
-    debugPrint('${event.vehicleUrls}');
     if (event.vehicleUrls.isEmpty) {
-      emit(const VehicleByIdsLoaded(vehicles: []));
+      emit(VehicleByIdsLoaded(vehicles: const []));
       return;
     }
     for (var vehicle in event.vehicleUrls) {

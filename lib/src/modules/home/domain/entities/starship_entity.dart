@@ -24,6 +24,29 @@ class StarshipEntity extends TranspoBaseEntity {
     required super.url,
     super.imageUrl,
   });
+
+  StarshipEntity copyWith({String? imageUrl}) {
+    return StarshipEntity(
+        hyperdriveRating: hyperdriveRating,
+        mglt: mglt,
+        starshipClass: starshipClass,
+        uniqueId: uniqueId,
+        name: name,
+        model: model,
+        manufacturer: manufacturer,
+        costInCredits: costInCredits,
+        length: length,
+        maxAtmospheringSpeed: maxAtmospheringSpeed,
+        crew: crew,
+        passengers: passengers,
+        cargoCapacity: cargoCapacity,
+        consumables: consumables,
+        pilots: pilots,
+        films: films,
+        url: url,
+        imageUrl: imageUrl ?? this.imageUrl);
+  }
+
   @override
   List<Object?> get props =>
       super.props..add([hyperdriveRating, mglt, starshipClass]);

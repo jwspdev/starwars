@@ -1,4 +1,3 @@
-import 'package:star_wars_app/src/core/utils/constants.dart';
 import 'package:star_wars_app/src/core/utils/extensions/string_extensions.dart';
 import 'package:star_wars_app/src/modules/home/domain/entities/vehicle_entity.dart';
 
@@ -23,7 +22,7 @@ class Vehicle extends VehicleEntity {
   //from Json Mapper
   factory Vehicle.fromJson(Map<String, dynamic> json) {
     String id = json['url'].toString().getIdFromUrl();
-    String uniqueId = "$VEHICLE_PATH$id";
+    String uniqueId = "vehicle_$id";
     return Vehicle(
         uniqueId: uniqueId,
         vehicleClass: json['vehicle_class'] ?? '',
@@ -47,6 +46,7 @@ class Vehicle extends VehicleEntity {
   }
   //to entity converter
   VehicleEntity toEntity() => VehicleEntity(
+      uniqueId: uniqueId,
       vehicleClass: vehicleClass,
       name: name,
       model: model,

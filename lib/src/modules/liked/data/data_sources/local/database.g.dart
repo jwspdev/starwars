@@ -121,8 +121,8 @@ class _$PersonDao extends PersonDao {
             (PersonEntity item) => <String, Object?>{
                   'uniqueId': item.uniqueId,
                   'name': item.name,
-                  'height': _doubleConverter.encode(item.height),
-                  'mass': _doubleConverter.encode(item.mass),
+                  'height': item.height,
+                  'mass': item.mass,
                   'hairColor': item.hairColor,
                   'skinColor': item.skinColor,
                   'eyeColor': item.eyeColor,
@@ -141,8 +141,8 @@ class _$PersonDao extends PersonDao {
             (PersonEntity item) => <String, Object?>{
                   'uniqueId': item.uniqueId,
                   'name': item.name,
-                  'height': _doubleConverter.encode(item.height),
-                  'mass': _doubleConverter.encode(item.mass),
+                  'height': item.height,
+                  'mass': item.mass,
                   'hairColor': item.hairColor,
                   'skinColor': item.skinColor,
                   'eyeColor': item.eyeColor,
@@ -171,8 +171,8 @@ class _$PersonDao extends PersonDao {
         mapper: (Map<String, Object?> row) => PersonEntity(
             uniqueId: row['uniqueId'] as String?,
             name: row['name'] as String,
-            height: _doubleConverter.decode(row['height'] as String),
-            mass: _doubleConverter.decode(row['mass'] as String),
+            height: row['height'] as String,
+            mass: row['mass'] as String,
             hairColor: row['hairColor'] as String,
             skinColor: row['skinColor'] as String,
             eyeColor: row['eyeColor'] as String,
@@ -191,8 +191,8 @@ class _$PersonDao extends PersonDao {
         mapper: (Map<String, Object?> row) => PersonEntity(
             uniqueId: row['uniqueId'] as String?,
             name: row['name'] as String,
-            height: _doubleConverter.decode(row['height'] as String),
-            mass: _doubleConverter.decode(row['mass'] as String),
+            height: row['height'] as String,
+            mass: row['mass'] as String,
             hairColor: row['hairColor'] as String,
             skinColor: row['skinColor'] as String,
             eyeColor: row['eyeColor'] as String,

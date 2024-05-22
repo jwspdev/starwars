@@ -8,8 +8,8 @@ class PersonEntity extends Equatable {
   final String? uniqueId;
 
   final String name;
-  final double height;
-  final double mass;
+  final String height;
+  final String mass;
   final String hairColor;
   final String skinColor;
   final String eyeColor;
@@ -37,6 +37,25 @@ class PersonEntity extends Equatable {
     required this.url,
     this.imageUrl,
   });
+
+  PersonEntity copyWith({String? imageUrl}) {
+    return PersonEntity(
+        uniqueId: uniqueId,
+        name: name,
+        height: height,
+        mass: mass,
+        hairColor: hairColor,
+        skinColor: skinColor,
+        eyeColor: eyeColor,
+        birthYear: birthYear,
+        gender: gender,
+        films: films,
+        vehicles: vehicles,
+        starships: starships,
+        url: url,
+        imageUrl: imageUrl ?? this.imageUrl);
+  }
+
   @override
   List<Object?> get props => [
         uniqueId,
