@@ -64,8 +64,7 @@ class _RateFilmsPageState extends State<RateFilmsPage> {
             films.insert(newIndex, item);
             for (int i = 0; i < films.length; i++) {
               FilmEntity currentFilm = films[i];
-              currentFilm.rank = i + 1;
-              // debugPrint('${currentFilm.title} ${currentFilm.rank}');
+              films[i] = currentFilm.copyWith(rank: i + 1);
             }
 
             _updateFilmListOrder(oldFilms, films);
@@ -160,8 +159,6 @@ class _RateFilmsPageState extends State<RateFilmsPage> {
     if (isSame == false) {
       LocalFilmBloc bloc = LocalFilmBloc(sl());
       bloc.add(OnSaveOrUpdateFilms(films: films));
-    } else {
-      debugPrint('parehas');
     }
   }
 
