@@ -42,4 +42,5 @@ flutter run
 ## ISSUES:
 - The images uploaded comes from my personal cloud storage because the data from https://swapi.py4e.com/ doesn't contain images.
   It is very unoptimal as what I did is to add image urls to each model, validate if the imageurl doesn't produce any error, then saves the image url for the models.
-  THIS IS FOR SHOWING WHAT THE APP WILL LOOK LIKE ONLY. MODIFICATIONS WILL BE MADE. HEHE 
+  THIS IS FOR SHOWING WHAT THE APP WILL LOOK LIKE IF IMAGES ARE PRESENT.
+  MODIFICATIONS WILL BE MADE. HEHE 
