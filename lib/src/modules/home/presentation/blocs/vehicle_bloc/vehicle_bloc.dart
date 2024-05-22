@@ -59,8 +59,6 @@ class VehicleBloc extends Bloc<VehicleEvent, VehicleState> {
         List<VehicleEntity> vehicleList =
             listVehicleResponseEntity?.results ?? [];
 
-        debugPrint('${listVehicleResponseEntity?.next}');
-
         emit(VehiclesLoaded(
           result: [...state.result, ...vehicleList],
         ));
@@ -76,7 +74,6 @@ class VehicleBloc extends Bloc<VehicleEvent, VehicleState> {
     List<int> ids = [];
     List<VehicleEntity> vehicleList = [];
     Exception? exception;
-    debugPrint('${event.vehicleUrls}');
     if (event.vehicleUrls.isEmpty) {
       emit(VehicleByIdsLoaded(vehicles: const []));
       return;

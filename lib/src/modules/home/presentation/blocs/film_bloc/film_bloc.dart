@@ -35,7 +35,7 @@ class FilmBloc extends Bloc<FilmEvent, FilmState> {
         for (int i = 0; i < apiFilms.length; i++) {
           debugPrint('${apiFilms[i].imageUrl}');
           FilmEntity currentFilm = apiFilms[i];
-          currentFilm.rank ??= i + 1;
+          currentFilm.copyWith(rank: currentFilm.rank ?? i + 1);
         }
         await _filmLocalRepository.insertListOfFilms(apiFilms);
       }
