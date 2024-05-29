@@ -21,6 +21,8 @@ class Film extends FilmEntity {
   factory Film.fromJson(Map<String, dynamic> json) {
     String id = json['url'].toString().getIdFromUrl();
     String uniqueId = "film_$id";
+    var imageUrl =
+        'https://firebasestorage.googleapis.com/v0/b/star-wars-project-deae7.appspot.com/o/$uniqueId.jpeg?alt=media&token=99bbd36a-e9b2-4244-b325-45e11ceadb9d';
     return Film(
         uniqueId: uniqueId,
         title: json['title'] ?? '',
@@ -32,7 +34,8 @@ class Film extends FilmEntity {
         characters: (json['characters'] as List<dynamic>?)
             ?.map((e) => e.toString())
             .toList(),
-        url: json['url'] ?? '');
+        url: json['url'] ?? '',
+        imageUrl: imageUrl);
   }
   //to entity converter
   FilmEntity toEntity() => FilmEntity(

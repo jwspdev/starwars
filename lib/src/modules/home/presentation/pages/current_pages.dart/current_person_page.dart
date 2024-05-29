@@ -151,10 +151,10 @@ class CurrentPersonPage extends StatelessWidget {
                       const SizedBox(
                         height: 8,
                       ),
-                      Text(
-                        currentPerson.uniqueId!,
-                        style: openSansExtraBoldText(fontSize: 24),
-                      ),
+                      // Text(
+                      //   currentPerson.uniqueId!,
+                      //   style: openSansExtraBoldText(fontSize: 24),
+                      // ),
                       Text(
                         currentPerson.name,
                         style: openSansExtraBoldText(fontSize: 24),

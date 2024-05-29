@@ -48,10 +48,26 @@ class RelatedFilmsContainer extends StatelessWidget {
                                 ? ClipRRect(
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(8)),
-                                    child: Image.asset(
-                                      'assets/images/no_image.jpg',
-                                      fit: BoxFit.cover,
-                                    ),
+                                    child: films[index].imageUrl == null
+                                        ? Image.asset(
+                                            'assets/images/no_image.jpg',
+                                            fit: BoxFit.cover,
+                                            width: double.infinity,
+                                          )
+                                        : Image.network(
+                                            '${films[index].imageUrl}',
+                                            fit: BoxFit.cover,
+                                            width: double.infinity,
+                                            errorBuilder:
+                                                (context, error, stackTrace) {
+                                              return Image.asset(
+                                                'assets/images/no_image.jpg',
+                                                fit: BoxFit.cover,
+                                                width: double.infinity,
+                                                alignment: Alignment.center,
+                                              );
+                                            },
+                                          ),
                                   )
                                 : Image.network(films[index].imageUrl!),
                           ),

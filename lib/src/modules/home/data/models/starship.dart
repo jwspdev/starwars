@@ -26,6 +26,8 @@ class Starship extends StarshipEntity {
   factory Starship.fromJson(Map<String, dynamic> json) {
     String id = json['url'].toString().getIdFromUrl();
     String uniqueId = "starship_$id";
+    var imageUrl =
+        'https://firebasestorage.googleapis.com/v0/b/star-wars-project-deae7.appspot.com/o/$uniqueId.png?alt=media&token=5a6f2555-4e54-46e2-a76a-309266bb0e97';
     return Starship(
         uniqueId: uniqueId,
         hyperdriveRating: json['hyperdrive_rating'],
@@ -47,7 +49,8 @@ class Starship extends StarshipEntity {
         films: (json['films'] as List<dynamic>?)
             ?.map((e) => e.toString())
             .toList(),
-        url: json['url']);
+        url: json['url'],
+        imageUrl: imageUrl);
   }
 
   //to entity converter
@@ -68,5 +71,6 @@ class Starship extends StarshipEntity {
       consumables: consumables,
       pilots: pilots,
       films: films,
-      url: url);
+      url: url,
+      imageUrl: imageUrl);
 }

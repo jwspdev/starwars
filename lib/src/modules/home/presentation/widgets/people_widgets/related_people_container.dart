@@ -70,9 +70,21 @@ class RelatedPeopleContainer extends StatelessWidget {
                                         topRight: Radius.circular(8)),
                                     child: Image.asset(
                                       'assets/images/no_image.jpg',
-                                      // fit: BoxFit.fitHeight,
+                                      fit: BoxFit.cover,
+                                      alignment: Alignment.center,
                                     ))
-                                : Image.network(currentPerson.imageUrl!),
+                                : Image.network(
+                                    '${currentPerson.imageUrl}',
+                                    fit: BoxFit.cover,
+                                    alignment: Alignment.center,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Image.asset(
+                                        'assets/images/no_image.jpg',
+                                        fit: BoxFit.cover,
+                                        alignment: Alignment.center,
+                                      );
+                                    },
+                                  ),
                             Column(
                               children: [
                                 Text(

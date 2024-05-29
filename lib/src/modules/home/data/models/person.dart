@@ -21,26 +21,29 @@ class Person extends PersonEntity {
   factory Person.fromJson(Map<String, dynamic> json) {
     String id = json['url'].toString().getIdFromUrl();
     String uniqueId = "person_$id";
+    var imageUrl =
+        'https://firebasestorage.googleapis.com/v0/b/star-wars-project-deae7.appspot.com/o/$uniqueId.jpeg?alt=media&token=99bbd36a-e9b2-4244-b325-45e11ceadb9d';
     return Person(
-      uniqueId: uniqueId,
-      name: json['name'],
-      height: json['height'],
-      mass: json['mass'] ?? '0',
-      hairColor: json['hair_color'],
-      skinColor: json['skin_color'],
-      eyeColor: json['eye_color'],
-      birthYear: json['birth_year'],
-      gender: json['gender'],
-      films:
-          (json['films'] as List<dynamic>?)?.map((e) => e.toString()).toList(),
-      vehicles: (json['vehicles'] as List<dynamic>?)
-          ?.map((e) => e.toString())
-          .toList(),
-      starships: (json['starships'] as List<dynamic>?)
-          ?.map((e) => e.toString())
-          .toList(),
-      url: json['url'],
-    );
+        uniqueId: uniqueId,
+        name: json['name'],
+        height: json['height'],
+        mass: json['mass'] ?? '0',
+        hairColor: json['hair_color'],
+        skinColor: json['skin_color'],
+        eyeColor: json['eye_color'],
+        birthYear: json['birth_year'],
+        gender: json['gender'],
+        films: (json['films'] as List<dynamic>?)
+            ?.map((e) => e.toString())
+            .toList(),
+        vehicles: (json['vehicles'] as List<dynamic>?)
+            ?.map((e) => e.toString())
+            .toList(),
+        starships: (json['starships'] as List<dynamic>?)
+            ?.map((e) => e.toString())
+            .toList(),
+        url: json['url'],
+        imageUrl: imageUrl);
   }
   PersonEntity toEntity() => PersonEntity(
       uniqueId: uniqueId,

@@ -23,6 +23,8 @@ class Vehicle extends VehicleEntity {
   factory Vehicle.fromJson(Map<String, dynamic> json) {
     String id = json['url'].toString().getIdFromUrl();
     String uniqueId = "vehicle_$id";
+    var imageUrl =
+        'https://firebasestorage.googleapis.com/v0/b/star-wars-project-deae7.appspot.com/o/$uniqueId.png?alt=media&token=99bbd36a-e9b2-4244-b325-45e11ceadb9d';
     return Vehicle(
         uniqueId: uniqueId,
         vehicleClass: json['vehicle_class'] ?? '',
@@ -42,7 +44,8 @@ class Vehicle extends VehicleEntity {
         films: (json['films'] as List<dynamic>?)
             ?.map((e) => e.toString())
             .toList(),
-        url: json['url'] ?? '');
+        url: json['url'] ?? '',
+        imageUrl: imageUrl);
   }
   //to entity converter
   VehicleEntity toEntity() => VehicleEntity(
@@ -60,5 +63,6 @@ class Vehicle extends VehicleEntity {
       consumables: consumables,
       pilots: pilots,
       films: films,
-      url: url);
+      url: url,
+      imageUrl: imageUrl);
 }
