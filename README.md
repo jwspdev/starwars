@@ -10,6 +10,13 @@ The Star Wars Repository is a meticulously crafted application, developed using 
 ![home_vehicles](https://github.com/jwspdev/starwars/assets/63495554/66ea4195-3019-4bfd-898a-6fe4c83b5e30)
 ![home_starship](https://github.com/jwspdev/starwars/assets/63495554/4fabb478-522b-4d32-9738-02737fa82f02)
 ![home_people](https://github.com/jwspdev/starwars/assets/63495554/1f5e3041-2545-467e-958a-6a01786681d2)
+![current_person](https://github.com/jwspdev/starwars/assets/63495554/5516126a-a31a-4f3d-8603-429a281bdb97)
+![current_starship](https://github.com/jwspdev/starwars/assets/63495554/74e91fb3-d7df-4e9b-a782-68a461d430d6)
+![current_vehicle](https://github.com/jwspdev/starwars/assets/63495554/6b6f7400-dddf-4a2c-9027-24ab6ba42f9b)
+![liked_page](https://github.com/jwspdev/starwars/assets/63495554/9571cadc-49d9-4b3c-8147-5f6561d1354e)
+![rank_films_page](https://github.com/jwspdev/starwars/assets/63495554/15818751-8450-4a46-b315-82f769c530f1)
+
+
 ..MORE IMAGES WILL COME...
 ## Architecture
 - **Presentation**: Contains the user interface and presentation logic. Uses >flutter_bloc for managing state and >go_router for navigation.
