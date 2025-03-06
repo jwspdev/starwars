@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/widgets.dart';
 import 'package:retrofit/dio.dart';
 import 'package:star_wars_app/src/core/resources/data_state.dart';
 import 'package:star_wars_app/src/modules/home/data/data_sources/remote/starships/source/remote_starship_data_source.dart';
@@ -10,7 +9,6 @@ import 'package:star_wars_app/src/modules/home/data/models/starship.dart';
 import 'package:star_wars_app/src/modules/home/domain/entities/responses/list_starship_response_entity.dart';
 import 'package:star_wars_app/src/modules/home/domain/entities/starship_entity.dart';
 import 'package:star_wars_app/src/modules/home/domain/repositories/starship_repository.dart';
-import 'package:http/http.dart' as http;
 
 class StarshipRepositoryImpl implements StarshipRepository {
   final RemoteStarshipDataSourceImpl _remoteStarshipDataSourceImpl;
@@ -56,7 +54,6 @@ class StarshipRepositoryImpl implements StarshipRepository {
         //     }
         //   }
         // });
-        debugPrint('$data');
         return DataSuccess(data.toEntity());
       } else {
         return DataFailure(DioException(

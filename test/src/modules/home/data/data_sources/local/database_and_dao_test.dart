@@ -35,9 +35,6 @@ void main() {
         url: 'test_url',
         films: ['test', 'test2', 'test3']);
     await personDao.insertPerson(person);
-    // final result = await personDao.findPersonById('person/123');
-    final result = await personDao.getAllPeople();
-    debugPrint('$result');
   });
 
   group('test local film\n', () {

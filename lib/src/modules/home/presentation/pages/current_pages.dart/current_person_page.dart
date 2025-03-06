@@ -38,6 +38,7 @@ class CurrentPersonPage extends StatelessWidget {
     };
     return PopScope(
       canPop: false,
+      // ignore: deprecated_member_use
       onPopInvoked: (didPop) {
         _onPopPage(context);
       },

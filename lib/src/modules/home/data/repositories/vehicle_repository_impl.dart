@@ -9,7 +9,6 @@ import 'package:star_wars_app/src/modules/home/data/models/vehicle.dart';
 import 'package:star_wars_app/src/modules/home/domain/entities/responses/list_vehicle_response_entity.dart';
 import 'package:star_wars_app/src/modules/home/domain/entities/vehicle_entity.dart';
 import 'package:star_wars_app/src/modules/home/domain/repositories/vehicle_repository.dart';
-import 'package:http/http.dart' as http;
 
 class VehicleRepositoryImpl implements VehicleRepository {
   final RemoteVehicleDataSourceImpl _remoteVehicleDataSourceImpl;

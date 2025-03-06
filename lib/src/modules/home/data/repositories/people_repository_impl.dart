@@ -10,7 +10,6 @@ import 'package:star_wars_app/src/modules/home/data/models/responses/list_people
 import 'package:star_wars_app/src/modules/home/domain/entities/person_entity.dart';
 import 'package:star_wars_app/src/modules/home/domain/entities/responses/list_people_response_entity.dart';
 import 'package:star_wars_app/src/modules/home/domain/repositories/people_repository.dart';
-import 'package:http/http.dart' as http;
 
 class PeopleRepositoryImpl implements PeopleRepository {
   final RemotePeopleDataSourceImpl _remotePeopleDataSourceImpl;

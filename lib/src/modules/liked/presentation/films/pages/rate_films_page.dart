@@ -73,7 +73,7 @@ class _RateFilmsPageState extends State<RateFilmsPage> {
         children: <Widget>[
           for (int i = 0; i < films.length; i++)
             Card(
-              color: Colors.grey.shade700.withOpacity(0.5),
+              color: const Color.fromARGB(50, 97, 97, 97),
               elevation: 12,
               key: ValueKey('$i'),
               child: Padding(

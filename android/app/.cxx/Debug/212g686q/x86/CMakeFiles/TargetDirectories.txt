@@ -1,0 +1,2 @@
+D:/Programs/github/starwars/android/app/.cxx/Debug/212g686q/x86/CMakeFiles/edit_cache.dir
+D:/Programs/github/starwars/android/app/.cxx/Debug/212g686q/x86/CMakeFiles/rebuild_cache.dir

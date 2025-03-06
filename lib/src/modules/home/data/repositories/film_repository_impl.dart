@@ -7,7 +7,6 @@ import 'package:star_wars_app/src/modules/home/data/data_sources/remote/films/so
 import 'package:star_wars_app/src/modules/home/domain/entities/film_entity.dart';
 import 'package:star_wars_app/src/modules/home/domain/entities/responses/list_films_response_entity.dart';
 import 'package:star_wars_app/src/modules/home/domain/repositories/film_repository.dart';
-import 'package:http/http.dart' as http;
 
 class FilmRepositoryImpl implements FilmRepository {
   final RemoteFilmDataSource _remoteFilmDataSource;
