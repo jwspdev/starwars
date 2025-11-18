@@ -203,7 +203,7 @@ class CurrentPersonPage extends StatelessWidget {
   _onPopPage(BuildContext context) {
     context.read<LocalPeopleBloc>().add(OnCheckLikedPerson(person: person));
     final state = context.read<LocalPeopleBloc>().state;
-    if (state is IsPersonDisliked) {
+    if (state is IsPersonDisliked && context.canPop()) {
       context.pop('disliked');
     } else {
       context.pop();

@@ -74,8 +74,8 @@ class _FilmCarouselState extends State<FilmCarousel>
                 },
                 child: GestureDetector(
                     onTap: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("tapped: ${index + 1}")));
+                      // ScaffoldMessenger.of(context).showSnackBar(
+                      //     SnackBar(content: Text("tapped: ${index + 1}")));
                     },
                     child: _buildFilmContainer(widget.films[index])),
               );
